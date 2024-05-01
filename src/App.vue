@@ -22,7 +22,6 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  /* background-color: blue; */
 }
 /* 支持的话就替换 */
 @supports (background-image: url('@/assets/login_bg.webp')) {
