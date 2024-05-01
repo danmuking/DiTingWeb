@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+    },
+    "ignoreDeprecations": "5.0",
+    "verbatimModuleSyntax": true,
+
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",

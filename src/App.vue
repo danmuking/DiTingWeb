@@ -1,30 +1,33 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+// import { RouterView } from 'vue-router'
+// 全局导入 toast 样式
+import 'element-plus/es/components/message/style/css'
+import 'element-plus/es/components/message-box/style/css'
+// element dark 模式
+import 'element-plus/theme-chalk/dark/css-vars.css'
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="app-wrapper">
+    <!-- <RouterView /> -->
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.app-wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("@/assets/login_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* background-color: blue; */
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+/* 支持的话就替换 */
+@supports (background-image: url('@/assets/login_bg.webp')) {
+  .app-wrapper {
+    background-image: url('@/assets/login_bg.webp');
+  }
 }
 </style>
