@@ -9,14 +9,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "alova": "^2.20.3",
     "element-plus": "^2.7.2",
+    "mitt": "^3.0.1",
+    "node-sass": "^9.0.0",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
     "@vitejs/plugin-vue": "^5.0.4",
+    "autoprefixer": "^10.4.19",
+    "postcss-loader": "^8.1.1",
+    "sass": "^1.76.0",
+    "sass-loader": "^14.2.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vue-tsc": "^2.0.6"

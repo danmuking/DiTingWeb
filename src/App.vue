@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import { RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 // 全局导入 toast 样式
 import 'element-plus/es/components/message/style/css'
 import 'element-plus/es/components/message-box/style/css'
@@ -9,7 +9,7 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 
 <template>
   <div class="app-wrapper">
-    <!-- <RouterView /> -->
+    <RouterView />
   </div>
 </template>
 
