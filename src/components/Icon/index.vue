@@ -20,8 +20,10 @@ const props = withDefaults(defineProps<Props>(), {
 const iconCls = computed(() => {
   return [
     {
-      mallchat: !props.colorful,
-      mallchatcolor: props.colorful,
+      public: !props.colorful,
+      publiccolor: props.colorful,
+      // diting: !props.colorful,
+      diting: props.colorful,
       [`icon-spin`]: props.spin,
     },
     `icon-${props.icon}`,

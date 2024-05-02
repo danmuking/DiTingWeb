@@ -4,7 +4,7 @@
   align-items: center;
   width: 80px;
   padding: 20px 0;
-  color: var(--font-main);
+  color: var(--font-base);
   user-select: none;
 
   .menu {
@@ -77,7 +77,12 @@
       }
     }
 
-    .mallchatcolor {
+    // .publiccolor {
+    //   display: block;
+    //   font-size: 23px !important;
+    //   line-height: 28px;
+    // }
+    .diting {
       display: block;
       font-size: 23px !important;
       line-height: 28px;

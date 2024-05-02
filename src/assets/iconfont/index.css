@@ -1,13 +1,13 @@
 @font-face {
-  font-family: mallchat; /* Project id 4142069 */
+  font-family: public; /* Project id 4142069 */
   src: url('//at.alicdn.com/t/c/font_4142069_j1hgr4n5.woff2?t=1692714195475') format('woff2'),
     url('//at.alicdn.com/t/c/font_4142069_j1hgr4n5.woff?t=1692714195475') format('woff'),
     url('//at.alicdn.com/t/c/font_4142069_j1hgr4n5.ttf?t=1692714195475') format('truetype');
 }
 
-.mallchat {
+.public {
   /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
-  font-family: mallchat !important;
+  font-family: public !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;

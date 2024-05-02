@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import qrcode from '@/assets/qrcode.jpeg'
 import { computed, ref } from 'vue'
 import { judgeClient } from '@/utils/detectDevice'
 
@@ -11,7 +10,7 @@ const isPc = computed(() => client === 'PC')
 
 const menuList = [
   {
-    name: '哔哩哔哩',
+    name: '',
     desc: '哔哩哔哩',
     icon: 'bilibili',
     handler: () => {
@@ -29,7 +28,7 @@ const menuList = [
   {
     name: '618超优惠',
     desc: '腾讯云',
-    icon: 'qcloud',
+    icon: 'tengxunyun',
     handler: () => {
       window.open('https://curl.qcloud.com/qSaH0JLT', '_blank')
     },
@@ -37,7 +36,7 @@ const menuList = [
   {
     name: '后端源码',
     desc: 'MallChatWeb Server',
-    icon: 'github',
+    icon: 'GitHubBlack',
     handler: () => {
       window.open('https://github.com/zongzibinbin/MallChat', '_blank')
     },
@@ -45,7 +44,7 @@ const menuList = [
   {
     name: '前端源码',
     desc: 'MallChatWeb Web',
-    icon: 'github',
+    icon: 'GitHubBlack',
     handler: () => {
       window.open('https://github.com/Evansy/MallChatWeb', '_blank')
     },
@@ -56,12 +55,12 @@ const menuList = [
     <aside class="side-toolbar">
       <div></div>
       <div class="menu">
-        <!-- <el-tooltip effect="dark" :placement="isPc ? 'right' : 'bottom'">
+        <el-tooltip effect="dark" :placement="isPc ? 'right' : 'bottom'">
           <template #content>
             <img class="icon-wechat-qrcode" :src="qrcode" alt="wx qrcode" />
           </template>
           <Icon icon="weixin" :size="28" colorful />
-        </el-tooltip> -->
+        </el-tooltip>
         <a
           v-for="(item, index) in menuList"
           class="menu-item"
@@ -74,7 +73,6 @@ const menuList = [
         </a>
       </div>
       <!-- <Icon icon="zhankai" :size="28" /> -->
-      <!-- <el-icon><Plus /></el-icon> -->
       <!-- <UserSettingBox v-model="visible" /> -->
     </aside>
   </template>

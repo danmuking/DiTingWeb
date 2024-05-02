@@ -4,7 +4,9 @@
 
 <template>
   <div class="chat-box">
-
+    <div class="chat-wrapper">
+    </div>
+    <UserList v-show="true" />
   </div>
 </template>
 

@@ -1,0 +1,38 @@
+/* stylelint-disable */
+/* eslint-disable */
+/* prettier-ignore */
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+    font-family: 'diting';  /* Project id 4532118 */
+    src: 
+         url('//at.alicdn.com/t/c/font_4532118_1cf4cun7r1l.woff2?t=1714649429488') format('woff2'),
+         url('//at.alicdn.com/t/c/font_4532118_1cf4cun7r1l.woff?t=1714649429488') format('woff'),
+         url('//at.alicdn.com/t/c/font_4532118_1cf4cun7r1l.ttf?t=1714649429488') format('truetype');
+  }
+
+.diting {
+    font-family: 'diting' !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    /* -moz-osx-font-smoothing: grayscale; */
+}
+
+.icon-weixin:before {
+    content: '\e620';
+}
+.icon-bilibili:before {
+    content: '\e609';
+}
+
+.icon-GitHubBlack:before {
+    content: '\ea0a';
+}
+
+.icon-yuque:before {
+    content: '\e625';
+}
+
+.icon-tengxunyun:before {
+    content: '\e6dd';
+}

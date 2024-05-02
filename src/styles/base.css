@@ -1,6 +1,6 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --color-primary: #d9ecff;
+  --color-primary: #337ecc;
   --color-link: #002aff;
   --color-wechat: #2aae67;
   --color-online: greenyellow;
@@ -13,16 +13,16 @@
 
   /* font */
   --font-placeholder: #a8abb2;
-  --font-main: #ffffff;
-  --font-base: #333;
-  --font-gray: #666;
+  --font-main: #303133;
+  --font-base: #606266;
+  --font-gray: #909399;
   --font-light: #A8ABB2;
   --font-light-1: #eee;
   --font-pink: #fe2c55;
 
   /* 背景色 */
   --background-indigo: #79bbff;
-  --background-wrapper: #409EFF;
+  --background-wrapper: #ecf5ff;
   --background-secondary: #ecf5ff;
   --background-black-half: rgba(0, 0, 0, 50%);
   --background-dark: rgba(39, 42, 55, 40%);
