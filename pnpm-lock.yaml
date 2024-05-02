@@ -14,6 +14,9 @@ importers:
       alova:
         specifier: ^2.20.3
         version: 2.20.3
+      dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
       element-plus:
         specifier: ^2.7.2
         version: 2.7.2(vue@3.4.26(typescript@5.4.5))

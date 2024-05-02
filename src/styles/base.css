@@ -1,29 +1,29 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --color-primary: #1d90f5;
+  --color-primary: #d9ecff;
   --color-link: #002aff;
   --color-wechat: #2aae67;
   --color-online: greenyellow;
   --color-white: #fff;
   --color-gold: #c59512;
-  --color-light-1: #bebebe;
-  --color-light-2: #dedfe0;
-  --color-light-3: #e9e9eb;
-  --color-light-4: #f5f5f5;
+  --color-light-1: #303133;
+  --color-light-2: #606266;
+  --color-light-3: #909399;
+  --color-light-4: #A8ABB2;
 
   /* font */
   --font-placeholder: #a8abb2;
-  --font-main: #fff;
+  --font-main: #ffffff;
   --font-base: #333;
   --font-gray: #666;
-  --font-light: #999;
+  --font-light: #A8ABB2;
   --font-light-1: #eee;
   --font-pink: #fe2c55;
 
   /* 背景色 */
-  --background-indigo: #2c3e50;
-  --background-wrapper: #272a37;
-  --background-secondary: #323644;
+  --background-indigo: #79bbff;
+  --background-wrapper: #409EFF;
+  --background-secondary: #ecf5ff;
   --background-black-half: rgba(0, 0, 0, 50%);
   --background-dark: rgba(39, 42, 55, 40%);
   --background-mask: rgba(255, 255, 255, 20%);
@@ -34,7 +34,7 @@
 
   /* hover */
   --hover-primary: #2287e1;
-  --hover-bg-1: #484d5f;
+  --hover-bg-1: #79bbff;
   --hover-bg-2: rgba(0, 0, 0, 20%);
 
   /* border */

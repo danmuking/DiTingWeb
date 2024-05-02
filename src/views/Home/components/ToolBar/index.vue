@@ -11,7 +11,7 @@ const isPc = computed(() => client === 'PC')
 
 const menuList = [
   {
-    name: '',
+    name: '哔哩哔哩',
     desc: '哔哩哔哩',
     icon: 'bilibili',
     handler: () => {
