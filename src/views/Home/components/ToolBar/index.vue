@@ -7,6 +7,7 @@ const visible = ref(false)
 
 // // 是否PC端
 const isPc = computed(() => client === 'PC')
+console.log(isPc)
 
 const menuList = [
   {
@@ -53,7 +54,7 @@ const menuList = [
 </script>
 <template>
     <aside class="side-toolbar">
-      <div></div>
+      <Avatar :src="''" :size="isPc ? 50 : 40" :shape="'square'" />
       <div class="menu">
         <el-tooltip effect="dark" :placement="isPc ? 'right' : 'bottom'">
           <template #content>
