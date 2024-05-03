@@ -13,6 +13,7 @@ export enum LoginStatus {
 export const useWsLoginStore = defineStore('wsLogin', () => {
   const loginQrCode = ref<string>()
   const showLogin = ref(false)
+  const showLoginTalbe = ref(true)
   const loginStatus = ref(LoginStatus.Init)
   function getLoginQrCode() {
     wsIns.send({ type: WsRequestMsgType.RequestLoginQrCode })
@@ -26,6 +27,7 @@ export const useWsLoginStore = defineStore('wsLogin', () => {
     loginQrCode,
     loginStatus,
     showLogin,
+    showLoginTalbe,
     resetLoginState,
     getLoginQrCode,
   }

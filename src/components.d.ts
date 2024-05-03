@@ -14,19 +14,13 @@ declare module 'vue' {
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
-    ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     Icon: typeof import('./components/Icon/index.vue')['default']
-    IEpChatDotRound: typeof import('~icons/ep/chat-dot-round')['default']
-    IEpSuccessFilled: typeof import('~icons/ep/success-filled')['default']
     LoginBox: typeof import('./components/LoginBox/index.vue')['default']
+    LoginTable: typeof import('./components/LoginBox/components/LoginTable/index.vue')['default']
+    RegisterTable: typeof import('./components/LoginBox/components/RegisterTable/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-  }
-  export interface ComponentCustomProperties {
-    vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

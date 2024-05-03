@@ -1,0 +1,22 @@
+.login-wrapper{
+  width: 100%;
+}
+
+.login-input-wrapper{
+  width: 100%;
+  .el-input {
+    // margin: 0 8px;
+  }
+}
+.login-button-wrapper{
+  width: 100%;
+  // padding: 0 8px;
+  // 居中
+  display: flex;
+  justify-content: center;
+  .el-button{
+    width: 100%;
+    height: 40px;
+    // width: 49%;
+  }
+}

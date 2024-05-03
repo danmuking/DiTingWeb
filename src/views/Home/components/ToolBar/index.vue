@@ -56,28 +56,22 @@ const menuList = [
 ]
 </script>
 <template>
-    <aside class="side-toolbar">
-      <Avatar :src="userStore.isSign ? avatar : ''" :size="isPc ? 50 : 40" :shape="'square'" />
-      <div class="menu">
-        <el-tooltip effect="dark" :placement="isPc ? 'right' : 'bottom'">
-          <template #content>
-            <img class="icon-wechat-qrcode" :src="qrcode" alt="wx qrcode" />
-          </template>
-          <Icon icon="weixin" :size="28" colorful />
-        </el-tooltip>
-        <a
-          v-for="(item, index) in menuList"
-          class="menu-item"
-          :key="index"
-          :title="item.desc"
-          @click="item.handler"
-        >
-          <Icon :icon="item.icon" :size="28" colorful />
-          <span v-if="item.name" class="menu-item-name">{{ item.name }}</span>
-        </a>
-      </div>
-      <!-- <UserSettingBox v-model="visible" /> -->
-    </aside>
-  </template>
+  <aside class="side-toolbar">
+    <Avatar :src="userStore.isSign ? avatar : ''" :size="isPc ? 50 : 40" :shape="'square'" />
+    <div class="menu">
+      <el-tooltip effect="dark" :placement="isPc ? 'right' : 'bottom'">
+        <template #content>
+          <img class="icon-wechat-qrcode" :src="qrcode" alt="wx qrcode" />
+        </template>
+        <Icon icon="weixin" :size="28" colorful />
+      </el-tooltip>
+      <a v-for="(item, index) in menuList" class="menu-item" :key="index" :title="item.desc" @click="item.handler">
+        <Icon :icon="item.icon" :size="28" colorful />
+        <span v-if="item.name" class="menu-item-name">{{ item.name }}</span>
+      </a>
+    </div>
+    <!-- <UserSettingBox v-model="visible" /> -->
+  </aside>
+</template>
 
 <style lang="scss" src="./styles.scss" scoped />

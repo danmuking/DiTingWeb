@@ -2,10 +2,8 @@
 import { computed, watchEffect } from "vue";
 import { useWsLoginStore, LoginStatus } from "@/stores/ws";
 // import QrCode from 'qrcode.vue'
-import { reactive, ref } from "vue";
-import type { ComponentSize, FormInstance, FormRules } from "element-plus";
-import urls from "@/services/urls";
-import apis from "@/services/apis";
+import LoginTable from "./components/LoginTable/index.vue"
+import RegisterTabel from "./components/RegisterTable/index.vue"
 
 interface LoginForm {
   username: string;
@@ -22,33 +20,16 @@ const visible = computed({
   },
 });
 
-const rules = reactive<FormRules<RuleForm>>({
-  username: [
-    { required: true, message: "请输入用户名", trigger: "blur" },
-    { min: 6, max: 15, message: "用户名长度在6-15个字符", trigger: "blur" },
-  ],
-  password: [{ required: true, message: "密码不能为空", trigger: "blur" }],
+const isLogin = computed({
+  get() {
+    return loginStore.showLoginTalbe;
+  },
+  set(value) {
+    value=loginStore.showLoginTalbe;
+  },
 });
-const loginForm = reactive<LoginForm>({
-  username: "",
-  password: "",
-});
-
-// 发送登录请求
-const login = () => {
-  apis
-    .userLogin({
-      username: loginForm.username,
-      password: loginForm.password,
-    })
-    .send()
-    .then((res) => {
-      console.log(res);
-    });
-};
 
 const loginQrCode = computed(() => loginStore.loginQrCode);
-const loginStatus = computed(() => loginStore.loginStatus);
 
 watchEffect(() => {
   // 打开窗口了 而且 二维码没获取，而且非登录就去获取二维码
@@ -64,25 +45,11 @@ watchEffect(() => {
     <div class="login-box">
       <img class="login-logo" src="@/assets/logo.png" alt="MallChat" />
       <p class="login-slogan">连接你我，谛听心声</p>
-      <el-form class="login-wrapper" :model="loginForm" :rules="rules" label-width="auto">
+      
         <div class="login-input-wrapper">
-          <el-form-item label="" prop="username">
-            <ElInput size="large" v-model="loginForm.username" placeholder="用户名" />
-          </el-form-item>
-          <el-form-item label="" prop="password">
-            <ElInput
-              size="large"
-              v-model="loginForm.password"
-              placeholder="密码"
-              show-password
-            />
-          </el-form-item>
+          <LoginTable v-if="isLogin" />
+          <RegisterTabel v-else></RegisterTabel>
         </div>
-        <div class="login-button-wrapper">
-          <el-button size="large">注册</el-button>
-          <el-button size="large" type="primary" @click="login">登录</el-button>
-        </div>
-      </el-form>
     </div>
   </ElDialog>
 </template>

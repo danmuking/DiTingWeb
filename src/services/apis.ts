@@ -28,7 +28,7 @@ const putRequest = <T>(url: string, params?: any) => alovaIns.Put<T, unknown>(ur
 const deleteRequest = <T>(url: string, params?: any) => alovaIns.Delete<T, unknown>(url, params)
 
 export default {
-  userLogin: (params: { username: string, passowrd: string }) => postRequest(urls.userLogin, params),
+  userLogin: (params: { username: string, password: string }) => postRequest(urls.userLogin, params),
 
 
   /** 获取群成员列表 */
