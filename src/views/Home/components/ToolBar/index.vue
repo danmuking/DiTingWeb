@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { judgeClient } from '@/utils/detectDevice'
+import { useUserStore } from '@/stores/user'
 
 const client = judgeClient()
-const visible = ref(false)
+const userStore = useUserStore()
+
+const avatar = computed(() => userStore?.userInfo.avatar)
 
 // // 是否PC端
 const isPc = computed(() => client === 'PC')
@@ -54,7 +57,7 @@ const menuList = [
 </script>
 <template>
     <aside class="side-toolbar">
-      <Avatar :src="''" :size="isPc ? 50 : 40" :shape="'square'" />
+      <Avatar :src="userStore.isSign ? avatar : ''" :size="isPc ? 50 : 40" :shape="'square'" />
       <div class="menu">
         <el-tooltip effect="dark" :placement="isPc ? 'right' : 'bottom'">
           <template #content>
@@ -73,7 +76,6 @@ const menuList = [
           <span v-if="item.name" class="menu-item-name">{{ item.name }}</span>
         </a>
       </div>
-      <!-- <Icon icon="zhankai" :size="28" /> -->
       <!-- <UserSettingBox v-model="visible" /> -->
     </aside>
   </template>
