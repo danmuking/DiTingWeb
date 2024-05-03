@@ -1,6 +1,6 @@
 import type {
   BadgeType,
-  CacheBadgeItem,
+  // CacheBadgeItem,
   CacheBadgeReq,
   CacheUserItem,
   CacheUserReq,
@@ -28,6 +28,9 @@ const putRequest = <T>(url: string, params?: any) => alovaIns.Put<T, unknown>(ur
 const deleteRequest = <T>(url: string, params?: any) => alovaIns.Delete<T, unknown>(url, params)
 
 export default {
+  userLogin: (params: { username: string, passowrd: string }) => postRequest(urls.userLogin, params),
+
+
   /** 获取群成员列表 */
   getGroupList: (params?: any) => getRequest<ListResponse<UserItem>>(urls.getGroupUserList, params),
   /** 获取群成员统计 */

@@ -42,17 +42,18 @@ export const alovaIns = createAlova({
 
   // 响应拦截器，也与axios类似
   responsed: async (response) => {
+    // debugger
     const json = await response.json()
     if (response.status !== 200 || !json.success) {
       // 这边抛出错误时，将会进入请求失败拦截器内
-      if (json.errMsg) {
+      if (json.message) {
         // 空 token 且 状态码 401 不弹提示
         if (!computedToken.get() && response.status === 401) {
           //
         } else {
-          ElMessage.error(json.errMsg)
+          ElMessage.error(json.message)
         }
-        throw new Error(json.errMsg)
+        throw new Error(json.message)
       } else {
         throw new Error(json.message)
       }
