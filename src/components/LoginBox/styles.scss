@@ -1,0 +1,74 @@
+:global(.login-box-modal) {
+  border-radius: 8px !important;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+}
+
+:global(.login-box-modal .el-dialog__header) {
+  padding: 0;
+}
+
+:global(.login-box-modal .el-dialog__headerbtn) {
+  z-index: 5;
+}
+.login-wrapper{
+  width: 100%;
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-qrcode-wrapper {
+  width: 328px;
+  height: 328px;
+}
+
+.login-logo {
+  width: 60px;
+  border-radius: 8px;
+}
+
+.login-slogan {
+  margin-top: 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--font-light);
+}
+
+.login-desc {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  margin-top: 16px;
+}
+
+.login-desc-icon {
+  margin-right: 8px;
+}
+
+.login-desc-bold {
+  font-weight: bold;
+  color: var(--color-wechat);
+}
+
+.login-input-wrapper{
+  width: 100%;
+  .el-input {
+    // margin: 0 8px;
+  }
+}
+.login-button-wrapper{
+  width: 100%;
+  // padding: 0 8px;
+  // 居中
+  display: flex;
+  justify-content: center;
+  .el-button{
+    width: 100%;
+    // width: 49%;
+  }
+}
