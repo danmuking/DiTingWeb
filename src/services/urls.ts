@@ -3,6 +3,7 @@ const prefix = import.meta.env.PROD ? import.meta.env.VITE_API_PREFIX : ''
 export default {
   // -------------- 用户相关 ---------------
   userLogin: `${prefix}/api/public/login`, // 登录
+  userRegister: `${prefix}/api/public/register`, // 注册
 
 
 

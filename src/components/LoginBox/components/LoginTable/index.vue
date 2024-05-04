@@ -35,7 +35,7 @@ const login = () => {
     })
     .send()
     .then((res) => {
-      console.log(res);
+      // console.log(res);
     });
 };
 </script>

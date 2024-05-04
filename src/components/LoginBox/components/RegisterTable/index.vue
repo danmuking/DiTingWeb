@@ -35,7 +35,7 @@ const registerForm = reactive<RegisterForm>({
 });
 
 const loginStore = useWsLoginStore();
-const showLogin = ()=>{
+const showLogin = () => {
     loginStore.showLoginTalbe = true
 }
 
@@ -44,16 +44,16 @@ const register = (formEl: FormInstance | undefined) => {
     if (!formEl) return
     formEl.validate((valid) => {
         if (valid) {
-            loginStore.showLoginTalbe = true
             // TODO:注册
             apis
-                .userLogin({
+                .userRegister({
                     username: registerForm.username,
                     password: registerForm.password,
                 })
                 .send()
-                .then((res) => {
-                    console.log(res);
+                .then(() => {
+                    ElMessage.success('注册成功');
+                    loginStore.showLoginTalbe = true
                 });
         } else {
             console.log('error submit!')
