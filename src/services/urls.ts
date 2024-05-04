@@ -5,6 +5,8 @@ export default {
   userLogin: `${prefix}/api/public/login`, // 登录
   userRegister: `${prefix}/api/public/register`, // 注册
 
+  // -------------- 聊天室相关 ---------------
+  getSessionList: `${prefix}/api/contact/getContactList`, // 会话列表
 
 
 
@@ -35,7 +37,6 @@ export default {
   newFriendCount: `${prefix}/capi/user/friend/apply/unread`, // 申请未读数
 
   // -------------- 聊天室相关 ---------------
-  getSessionList: `${prefix}/capi/chat/public/contact/page`, // 会话列表
   getMsgReadList: `${prefix}/capi/chat/msg/read/page`, // 消息的已读未读列表
   getMsgReadCount: `${prefix}/capi/chat/msg/read`, // 消息已读未读数
   createGroup: `${prefix}/capi/room/group`, // 新增群组

@@ -198,8 +198,11 @@ export const useChatStore = defineStore('chat', () => {
   }
 
   const getSessionList = async (isFresh = false) => {
+    // 如果不需要刷新，并且已经获取到了最后一条会话或者正在加载会话，直接返回
     if (!isFresh && (sessionOptions.isLast || sessionOptions.isLoading)) return
+    // 设置正在加载会话的状态为 true
     sessionOptions.isLoading = true
+    // 发送请求，获取会话列表
     const data = await apis
       .getSessionList({
         params: {
@@ -211,38 +214,64 @@ export const useChatStore = defineStore('chat', () => {
       .catch(() => {
         sessionOptions.isLoading = false
       })
+    // 如果没有获取到数据，直接返回
     if (!data) return
+    // 如果需要刷新，替换会话列表，否则将新的会话添加到会话列表的末尾
+    // debugger
+    console.log(data.data);
+    debugger
     isFresh
-      ? sessionList.splice(0, sessionList.length, ...data.list)
-      : sessionList.push(...data.list)
+      ? sessionList.splice(0, sessionList.length, ...data.data)
+      : sessionList.push(...data.data)
+    console.log(sessionList);
+    // 更新游标、是否已经获取到最后一条会话和正在加载会话的状态
     sessionOptions.cursor = data.cursor
     sessionOptions.isLast = data.isLast
     sessionOptions.isLoading = false
 
+    // 对会话列表进行排序和去重
     sortAndUniqueSessionList()
 
+    // 将第一条会话的未读消息数量设置为 0
     sessionList[0].unreadCount = 0
+    // 如果这是第一次初始化
     if (!isFirstInit) {
+      // 设置为已经初始化
       isFirstInit = true
-      globalStore.currentSession.roomId = data.list[0].roomId
-      globalStore.currentSession.type = data.list[0].type
-      // 用会话列表第一个去请求消息列表
-      getMsgList()
-      // 请求第一个群成员列表
-      currentRoomType.value === RoomTypeEnum.Group && groupStore.getGroupUserList(true)
-      // 初始化所有用户基本信息
-      userStore.isSign && cachedStore.initAllUserBaseInfo()
-      // 联系人列表
-      contactStore.getContactList(true)
+      // 设置当前会话的房间 ID 和类型为第一条会话的房间 ID 和类型
+      globalStore.currentSession.roomId = data.data[0].roomId
+      // TODO: 未完成
+      // globalStore.currentSession.type = data.list[0].type
+      // // 用会话列表第一个去请求消息列表
+      // getMsgList()
+      // // 如果当前房间的类型是群组，获取群组用户列表
+      // currentRoomType.value === RoomTypeEnum.Group && groupStore.getGroupUserList(true)
+      // // 如果用户已登录，初始化所有用户的基本信息
+      // userStore.isSign && cachedStore.initAllUserBaseInfo()
+      // // 获取联系人列表
+      // contactStore.getContactList(true)
     }
+    
+    
   }
 
   /** 会话列表去重并排序 */
   const sortAndUniqueSessionList = () => {
+    // 创建一个空对象，用于存储会话列表中的会话项
     const temp: Record<string, SessionItem> = {}
-    sessionList.forEach((item) => (temp[item.roomId] = item))
+    debugger
+    // 遍历会话列表
+    sessionList.forEach((item) => (
+      // 将每个会话项的 roomId 作为键，会话项本身作为值，存储到 temp 对象中
+      // 如果有重复的 roomId，后面的会话项会覆盖前面的会话项，从而实现去重
+      temp[item.roomId] = item))
+    // 清空会话列表，然后将 temp 对象中的所有值（即去重后的会话项）添加到会话列表中
     sessionList.splice(0, sessionList.length, ...Object.values(temp))
-    sessionList.sort((pre, cur) => cur.activeTime - pre.activeTime)
+    // 对会话列表进行排序
+    // 比较函数使用每个会话项的 activeTime 属性
+    // 如果前一个会话项的 activeTime 小于后一个会话项的 activeTime，前一个会话项会被排在后面
+    // 从而实现按 activeTime 降序排序
+    sessionList.sort((pre, cur) => cur.lastTime - pre.lastTime)
   }
 
   const updateSession = (roomId: number, roomProps: Partial<SessionItem>) => {

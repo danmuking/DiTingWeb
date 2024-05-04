@@ -32,6 +32,9 @@ export default {
   userLogin: (params: { username: string, password: string }) => postRequest(urls.userLogin, params),
   // 用户注册
   userRegister: (params: { username: string, password: string }) => postRequest(urls.userRegister, params),
+  // 获取会话列表
+  getSessionList: (params?: any) =>
+    getRequest<ListResponse<SessionItem>>(urls.getSessionList, params),
 
 
   /** 获取群成员列表 */
@@ -91,9 +94,7 @@ export default {
   deleteFriend: (params: { targetUid: number }) => deleteRequest(urls.deleteFriend, params),
   /** 好友申请未读数 */
   newFriendCount: () => getRequest<{ unReadCount: number }>(urls.newFriendCount),
-  /** 会话列表 */
-  getSessionList: (params?: any) =>
-    getRequest<ListResponse<SessionItem>>(urls.getSessionList, params),
+  
   /** 消息的已读未读列表 */
   getMsgReadList: (params?: any) =>
     getRequest<ListResponse<{ uid: number }>>(urls.getMsgReadList, params),

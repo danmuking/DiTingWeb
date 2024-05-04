@@ -25,7 +25,7 @@ export type ListResponse<T extends unknown> = {
   cursor: string
   /** 是否最后一页 */
   isLast: boolean
-  list: T[]
+  data: T[]
 }
 
 export type CacheBadgeReq = {
@@ -388,22 +388,28 @@ export enum IsAllUserEnum {
 
 /** 会话列表项 */
 export type SessionItem = {
-  /** 房间最后活跃时间(用来排序) */
-  activeTime: number
-  /** 会话头像 */
-  avatar: string
-  /** 是否全员展示的会话 0否 1是 */
-  hot_Flag: IsAllUserEnum
-  /** 会话名称 */
-  name: string
+  // 会话id
+  id:number
   /** 房间id */
   roomId: number
+  /** 会话头像 */
+  avatar: string
+  /** 会话名称 */
+  name: string
   /** 最新消息 */
-  text: string
-  /** 房间类型 1群聊 2单聊 */
-  type: RoomTypeEnum
+  lastMsg: string
+  /** 房间最后活跃时间/最后一条消息的时间(用来排序) */
+  lastTime: number
   /** 未读数 */
   unreadCount: number
+  
+  // /** 是否全员展示的会话 0否 1是 */
+  // hot_Flag: IsAllUserEnum
+  
+  
+  // /** 房间类型 1群聊 2单聊 */
+  // type: RoomTypeEnum
+  
 }
 
 /** 消息已读未读数列表项 */

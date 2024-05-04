@@ -50,7 +50,7 @@ const login = () => {
     })
     .send()
     .then((data) => {
-      debugger
+      // debugger
       userStore.isSign = true
       const { token, ...rest } = data as LoginSuccessResType
       // FIXME 可以不需要赋值了，单独请求了接口。
@@ -75,8 +75,8 @@ const login = () => {
           uid: rest.uid,
         },
       ])
-      // // 获取用户详情
-      // chatStore.getSessionList(true)
+      // 获取详情
+      chatStore.getSessionList(true)
       // // 自定义表情列表
       // emojiStore.getEmojiList()
     });

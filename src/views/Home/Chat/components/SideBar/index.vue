@@ -1,29 +1,45 @@
 <script setup lang="ts">
+import { computed, onBeforeMount } from 'vue'
 import { formatTimestamp } from '@/utils/computedTime'
-const sessionList = [
-    {
-      // ...item,
-      name: 'test',
-      avatar:'avatar',
-      roomId:1,
-      unreadCount: 1,
-      tag: '官方' ,
-      lastMsg: '欢迎使用MallChat',
-      // 获取当前时间
-      lastMsgTime: formatTimestamp(new Date().getTime() / 1000),
-    },
-    {
-      // ...item,
-      name: 'test',
-      avatar:'avatar',
-      roomId:1,
-      unreadCount: 1,
-      tag: '官方' ,
-      lastMsg: '欢迎使用MallChat',
-      // 获取当前时间
-      lastMsgTime: formatTimestamp(new Date().getTime() / 1000),
+import { useChatStore } from '@/stores/chat'
+import { useGlobalStore } from '@/stores/global'
+import renderReplyContent from '@/utils/renderReplyContent'
+import { MsgEnum, RoomTypeEnum } from '@/enums'
+
+const chatStore = useChatStore()
+const globalStore = useGlobalStore()
+onBeforeMount(() => {
+  // 请求回话列表
+  chatStore.getSessionList()
+})
+const sessionList = computed(() =>
+  chatStore.sessionList.map((item) => {
+    // 最后一条消息内容
+    const lastMsg = Array.from(chatStore.messageMap.get(item.roomId)?.values() || [])?.slice(
+      -1,
+    )?.[0]
+    let LastUserMsg = ''
+    if (lastMsg) {
+      // TODO:未完成
+      // const lastMsgUserName = useUserInfo(lastMsg.fromUser.uid)
+      const lastMsgUserName = "test"
+      LastUserMsg =
+        lastMsg.message?.type === MsgEnum.RECALL
+          ? `${lastMsgUserName.value.name}:'撤回了一条消息'`
+          : renderReplyContent(
+              lastMsgUserName.value.name,
+              lastMsg.message?.type,
+              lastMsg.message?.body?.content || lastMsg.message?.body,
+            )
     }
-]
+    return {
+      ...item,
+      // tag: item.hot_Flag === IsAllUserEnum.Yes ? '官方' : '',
+      lastMsg: LastUserMsg || item.lastMsg || '欢迎使用MallChat',
+      lastMsgTime: formatTimestamp(item?.lastTime),
+    }
+  }),
+)
 </script>
 
 <template>
