@@ -23,13 +23,13 @@
   /* 背景色 */
   --background-indigo: #79bbff;
   --background-wrapper: #ecf5ff;
-  --background-secondary: #ecf5ff;
+  --background-secondary: #d9ecff;
   --background-black-half: rgba(0, 0, 0, 50%);
   --background-dark: rgba(39, 42, 55, 40%);
   --background-mask: rgba(255, 255, 255, 20%);
   --background-1: #2b2d31;
   --background-2: #383c4b;
-  --background-3: #424656;
+  --background-3: #ecf5ff;
   --background-4: #efe2bb;
 
   /* hover */

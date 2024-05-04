@@ -44,7 +44,6 @@ const register = (formEl: FormInstance | undefined) => {
     if (!formEl) return
     formEl.validate((valid) => {
         if (valid) {
-            // TODO:注册
             apis
                 .userRegister({
                     username: registerForm.username,

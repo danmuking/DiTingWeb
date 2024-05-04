@@ -149,6 +149,7 @@ export const useChatStore = defineStore('chat', () => {
   // 将消息列表转换为数组
   const chatMessageList = computed(() => [...(currentMessageMap.value?.values() || [])])
 
+  // TODO: 未完成
   const getMsgList = async (size = pageSize) => {
     currentMessageOptions.value && (currentMessageOptions.value.isLoading = true)
     const data = await apis
@@ -163,8 +164,10 @@ export const useChatStore = defineStore('chat', () => {
       .finally(() => {
         currentMessageOptions.value && (currentMessageOptions.value.isLoading = false)
       })
+    // 数据不存在直接返回
     if (!data) return
-    const computedList = computedTimeBlock(data.list)
+    // 计算时间块
+    const computedList = computedTimeBlock(data.data)
 
     /** 收集需要请求用户详情的 uid */
     const uidCollectYet: Set<number> = new Set() // 去重用
@@ -190,6 +193,7 @@ export const useChatStore = defineStore('chat', () => {
       currentMessageMap.value?.set(msg.message.id, msg)
     })
 
+    // 如果 currentMessageOptions.value 存在，更新其 cursor、isLast 和 isLoading 属性
     if (currentMessageOptions.value) {
       currentMessageOptions.value.cursor = data.cursor
       currentMessageOptions.value.isLast = data.isLast
@@ -242,7 +246,8 @@ export const useChatStore = defineStore('chat', () => {
       globalStore.currentSession.roomId = data.data[0].roomId
       // TODO: 未完成
       // globalStore.currentSession.type = data.list[0].type
-      // // 用会话列表第一个去请求消息列表
+      // 用会话列表第一个去请求消息列表
+      // TODO: 未完成
       // getMsgList()
       // // 如果当前房间的类型是群组，获取群组用户列表
       // currentRoomType.value === RoomTypeEnum.Group && groupStore.getGroupUserList(true)

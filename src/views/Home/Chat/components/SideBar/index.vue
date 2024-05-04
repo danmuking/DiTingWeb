@@ -9,7 +9,7 @@ import { MsgEnum, RoomTypeEnum } from '@/enums'
 const chatStore = useChatStore()
 const globalStore = useGlobalStore()
 onBeforeMount(() => {
-  // 请求回话列表
+  // 请求会话列表
   chatStore.getSessionList()
 })
 const sessionList = computed(() =>

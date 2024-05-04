@@ -42,7 +42,9 @@ const checkTimeInterval = (cur: MessageType, pre: MessageType) => {
   }
 }
 
+// 定义一个函数，用于计算消息列表中的时间间隔
 export const computedTimeBlock = (list: MessageType[], needFirst = true) => {
+  // 如果 list 不存在或者为空，直接返回一个空数组
   if (!list || list.length === 0) return []
   // 是否需要保留 传入 list 第一个，如果是接口拉回来的消息列表就要保留，如果接收到新消息，需要拿当前消息列表最后一个拿来做时间间隔计算的话，就不需要保留第一个
   const temp = needFirst ? [list[0]] : []
