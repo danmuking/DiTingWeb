@@ -5,7 +5,7 @@ import { useUserStore } from '@/stores/user'
 
 const client = judgeClient()
 const userStore = useUserStore()
-
+const showSettingBox = () => (visible.value = true)
 const avatar = computed(() => userStore?.userInfo.avatar)
 
 // // 是否PC端
@@ -57,7 +57,7 @@ const menuList = [
 </script>
 <template>
   <aside class="side-toolbar">
-    <Avatar :src="userStore.isSign ? avatar : ''" :size="isPc ? 50 : 40" :shape="'square'" />
+    <Avatar :src="userStore.isSign ? avatar : ''" :size="isPc ? 50 : 40" :shape="'square'" v-login="showSettingBox" />
     <div class="menu">
       <el-tooltip effect="dark" :placement="isPc ? 'right' : 'bottom'">
         <template #content>

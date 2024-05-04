@@ -4,6 +4,9 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import './styles/main.css'
 import App from './App.vue'
 import router from './router'
+import vLogin from './directives/v-login'
+// import vFriends from './directives/v-friends'
+import vLoginShow from './directives/v-login-show'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
@@ -18,7 +21,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app
   .use(pinia)
   .use(router)
-//   .directive('login', vLogin) // 登录权限指令-未登录先登录
-//   .directive('login-show', vLoginShow) // 登录权限指令-未登录先登录
-//   .directive('friends', vFriends) // 是否好友
+  .directive('login', vLogin) // 登录权限指令-未登录先登录
+  .directive('login-show', vLoginShow) // 登录权限指令-未登录先登录
+  //   .directive('friends', vFriends) // 是否好友
   .mount('#app')

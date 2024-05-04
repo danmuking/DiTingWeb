@@ -13,6 +13,12 @@ import type {
   SexEnum,
 } from '@/enums'
 
+
+export type LoginSuccessResType = Pick<UserInfoType, 'avatar' | 'name' | 'uid'> & {
+  /** 用户的登录凭证，每次请求携带 */
+  token: string
+}
+
 /***/
 export type ListResponse<T extends unknown> = {
   /** 游标（下次翻页带上这参数）*/

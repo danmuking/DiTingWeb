@@ -13,7 +13,7 @@ interface LoginForm {
 const loginStore = useWsLoginStore();
 const visible = computed({
   get() {
-    return true;
+    return loginStore.showLogin;
   },
   set(value) {
     loginStore.showLogin = value;
@@ -41,7 +41,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <ElDialog class="login-box-modal" :width="376" v-model="visible" center align-center>
+  <ElDialog class="login-box-modal" :width="376" v-model="visible" center align-center >
     <div class="login-box">
       <img class="login-logo" src="@/assets/logo.png" alt="MallChat" />
       <p class="login-slogan">连接你我，谛听心声</p>
