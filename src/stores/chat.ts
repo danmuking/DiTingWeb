@@ -219,7 +219,7 @@ export const useChatStore = defineStore('chat', () => {
     // 如果需要刷新，替换会话列表，否则将新的会话添加到会话列表的末尾
     // debugger
     console.log(data.data);
-    debugger
+    // debugger
     isFresh
       ? sessionList.splice(0, sessionList.length, ...data.data)
       : sessionList.push(...data.data)
@@ -259,7 +259,7 @@ export const useChatStore = defineStore('chat', () => {
   const sortAndUniqueSessionList = () => {
     // 创建一个空对象，用于存储会话列表中的会话项
     const temp: Record<string, SessionItem> = {}
-    debugger
+    // debugger
     // 遍历会话列表
     sessionList.forEach((item) => (
       // 将每个会话项的 roomId 作为键，会话项本身作为值，存储到 temp 对象中

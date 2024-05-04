@@ -40,10 +40,15 @@ const sessionList = computed(() =>
     }
   }),
 )
+// 加载更多
+const load = () => {
+  chatStore.getSessionList()
+}
+
 </script>
 
 <template>
-  <ul class="chat-message" :infinite-scroll-immediate="false">
+  <ul class="chat-message" :infinite-scroll-immediate="false" v-infinite-scroll="load">
     <li
       v-for="(item, index) in sessionList"
       :key="index"
