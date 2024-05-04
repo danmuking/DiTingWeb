@@ -9,8 +9,8 @@ const pasteFile = ref<File>() // 记录input文本内容
 const visible = ref(false)
 const userStore = useUserStore()
 
-const onChangeMsgType = inject<(msgType: MsgEnum) => void>('onChangeMsgType')
-const onChangeFile = inject<(file: File[]) => void>('onChangeFile')
+// const onChangeMsgType = inject<(msgType: MsgEnum) => void>('onChangeMsgType')
+// const onChangeFile = inject<(file: File[]) => void>('onChangeFile')
 
 useEventListener(window, 'paste', (e) => {
   e.preventDefault()
@@ -45,8 +45,8 @@ const onClear = () => {
 const onSend = async () => {
   if (!pasteFile?.value) return
   // FIXME 如下逻辑可以尝试抽为 hook
-  onChangeMsgType?.(MsgEnum.IMAGE) // 设置上传类型为图片
-  await onChangeFile?.([pasteFile?.value]) // 上传文件并发送消息
+  // onChangeMsgType?.(MsgEnum.IMAGE) // 设置上传类型为图片
+  // await onChangeFile?.([pasteFile?.value]) // 上传文件并发送消息
   visible.value = false // 关闭弹窗
   onClear()
 }

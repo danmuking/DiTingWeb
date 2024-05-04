@@ -26,7 +26,6 @@ declare module 'vue' {
     IEpArrowDownBold: typeof import('~icons/ep/arrow-down-bold')['default']
     IEpChatDotRound: typeof import('~icons/ep/chat-dot-round')['default']
     IEpCheck: typeof import('~icons/ep/check')['default']
-    IEpClose: typeof import('~icons/ep/close')['default']
     IEpLoading: typeof import('~icons/ep/loading')['default']
     IEpLock: typeof import('~icons/ep/lock')['default']
     LoginBox: typeof import('./components/LoginBox/index.vue')['default']

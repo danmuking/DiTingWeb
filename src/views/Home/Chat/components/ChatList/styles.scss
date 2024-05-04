@@ -24,8 +24,8 @@
     width: 100%;
     padding: 16px 0;
     font-size: 14px;
-    color: var(--font-light-1);
-    background: linear-gradient(180deg, rgb(50, 54, 68) 0%, transparent 85%);
+    color: var(--font-gray);
+    background: linear-gradient(180deg, #ecf5ff 0%, transparent 85%);
 
     svg {
       @keyframes rotate {

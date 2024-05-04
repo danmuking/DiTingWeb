@@ -128,7 +128,7 @@ export const useChatStore = defineStore('chat', () => {
         if (!currentMessageMap.value) {
           messageMap.set(currentRoomId.value as number, new Map())
         }
-        getMsgList()
+        // getMsgList()
       }
 
       // 群组的时候去请求

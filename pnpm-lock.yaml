@@ -11,6 +11,9 @@ importers:
       '@element-plus/icons-vue':
         specifier: ^2.3.1
         version: 2.3.1(vue@3.4.26(typescript@5.4.5))
+      '@imengyu/vue3-context-menu':
+        specifier: ^1.4.1
+        version: 1.4.1
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
@@ -288,6 +291,9 @@ packages:
 
   '@iconify/utils@2.1.23':
     resolution: {integrity: sha512-YGNbHKM5tyDvdWZ92y2mIkrfvm5Fvhe6WJSkWu7vvOFhMtYDP0casZpoRz0XEHZCrYsR4stdGT3cZ52yp5qZdQ==}
+
+  '@imengyu/vue3-context-menu@1.4.1':
+    resolution: {integrity: sha512-34WInBVx0Mr0zSsRCQWG7ezHk0JzOuZqE4T8ywI82mbk/jfWBRtTkKHYSZbtmw2oYEfDFwCWdM/gur7QFAXYMA==}
 
   '@jridgewell/sourcemap-codec@1.4.15':
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
@@ -1958,6 +1964,8 @@ snapshots:
       mlly: 1.7.0
     transitivePeerDependencies:
       - supports-color
+
+  '@imengyu/vue3-context-menu@1.4.1': {}
 
   '@jridgewell/sourcemap-codec@1.4.15': {}
 
