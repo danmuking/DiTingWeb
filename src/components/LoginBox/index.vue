@@ -32,11 +32,11 @@ const isLogin = computed({
 const loginQrCode = computed(() => loginStore.loginQrCode);
 
 watchEffect(() => {
-  // 打开窗口了 而且 二维码没获取，而且非登录就去获取二维码
-  if (visible.value && !loginQrCode.value) {
-    // 获取登录二维码
-    loginStore.getLoginQrCode();
-  }
+  // // 打开窗口了 而且 二维码没获取，而且非登录就去获取二维码
+  // if (visible.value && !loginQrCode.value) {
+  //   // 获取登录二维码
+  //   loginStore.getLoginQrCode();
+  // }
 });
 </script>
 

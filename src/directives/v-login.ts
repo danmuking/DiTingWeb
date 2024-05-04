@@ -5,11 +5,12 @@ import { useWsLoginStore } from '@/stores/ws'
 const handler = (fn: Function) => {
   const userStore = useUserStore()
   const loginStore = useWsLoginStore()
-  // 没登录先登录
+  // 没登录显示登录界面
   if (!userStore.isSign) {
     loginStore.showLogin = true
     return
   }
+  // 已登录执行回调
   fn?.()
 }
 
