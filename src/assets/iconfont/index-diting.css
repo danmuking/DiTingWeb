@@ -1,14 +1,14 @@
 /* stylelint-disable */
 /* eslint-disable */
 /* prettier-ignore */
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
-    font-family: 'diting';
-    /* Project id 4532118 */
-    src:
-        url('//at.alicdn.com/t/c/font_4532118_voiehvkwg2s.woff2?t=1714653655396') format('woff2'),
-        url('//at.alicdn.com/t/c/font_4532118_voiehvkwg2s.woff?t=1714653655396') format('woff'),
-        url('//at.alicdn.com/t/c/font_4532118_voiehvkwg2s.ttf?t=1714653655396') format('truetype');
-}
+    font-family: 'diting';  /* Project id 4532118 */
+    src: 
+         url('//at.alicdn.com/t/c/font_4532118_l845azdxscs.woff2?t=1714825452694') format('woff2'),
+         url('//at.alicdn.com/t/c/font_4532118_l845azdxscs.woff?t=1714825452694') format('woff'),
+         url('//at.alicdn.com/t/c/font_4532118_l845azdxscs.ttf?t=1714825452694') format('truetype');
+  }
 
 .diting {
     font-family: 'diting' !important;
@@ -40,4 +40,19 @@
 
 .icon-Avator:before {
     content: '\ea0c';
+}
+.icon-face:before {
+    content: '\e681';
+}
+.icon-send:before {
+    content: '\e6f3';
+}
+.icon-file:before {
+    content: '\e615';
+}
+.icon-at:before {
+    content: '\e60c';
+}
+.icon-img:before {
+    content: '\ea0e';
 }
