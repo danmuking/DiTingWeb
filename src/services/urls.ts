@@ -9,6 +9,7 @@ export default {
   getSessionList: `${prefix}/api/contact/getContactList`, // 会话列表
   getMsgList: `${prefix}/api/contact/getMessageList`,
   getUserInfoBatch: `${prefix}/api/contact/userInfo/batch`, // 批量获取成员详细信息
+  sendMsg: `${prefix}/api/chat/msg`,
 
 
 
@@ -16,7 +17,6 @@ export default {
   getMemberStatistic: `${prefix}/capi/chat/public/member/statistic`,
   getBadgesBatch: `${prefix}/capi/user/public/badges/batch`,
   getAllUserBaseInfo: `${prefix}/capi/room/group/member/list`, // 房间内的所有群成员列表-@专用
-  sendMsg: `${prefix}/capi/chat/msg`,
   getUserInfoDetail: `${prefix}/capi/user/userInfo`, // 获取用户信息详情
   modifyUserName: `${prefix}/capi/user/name`, // 修改用户名
   getBadgeList: `${prefix}/capi/user/badges`, // 徽章列表

@@ -40,6 +40,8 @@ export default {
   /** 批量获取成员详细信息 */
   getUserInfoBatch: (users: CacheUserReq[]) =>
     postRequest<CacheUserItem[]>(urls.getUserInfoBatch, { list: users }),
+  /** 发送消息 */
+  sendMsg: (data?: MessageReq) => postRequest<MessageType>(urls.sendMsg, data),
 
 
 
@@ -55,9 +57,6 @@ export default {
   /** 批量获取徽章信息 */
   getBadgesBatch: (badges: CacheBadgeReq[]) =>
     postRequest<CacheBadgeItem[]>(urls.getBadgesBatch, { reqList: badges }),
-  
-  /** 发送消息 */
-  sendMsg: (data?: MessageReq) => postRequest<MessageType>(urls.sendMsg, data),
   /** 标记消息，点赞等 */
   markMsg: (data?: MarkMsgReq) => alovaIns.Put<void>(urls.markMsg, data),
   /** 获取用户详细信息 */

@@ -309,7 +309,7 @@ export const useChatStore = defineStore('chat', () => {
   const pushMsg = async (msg: MessageType) => {
     const current = messageMap.get(msg.message.roomId)
     current?.set(msg.message.id, msg)
-
+    debugger
     // 获取用户信息缓存
     // 尝试取缓存user, 如果有 lastModifyTime 说明缓存过了，没有就一定是要缓存的用户了
     const uid = msg.fromUser.uid
@@ -321,14 +321,14 @@ export const useChatStore = defineStore('chat', () => {
     if (globalStore.currentSession && globalStore.currentSession.roomId !== msg.message.roomId) {
       let result = undefined
       // 如果当前路由不是聊天，就开始拿会话详情，并手动新增一条会话记录
-      // if (route?.path && route?.path !== '/') {
-      //   globalStore.currentSession.roomId = msg.message.roomId
-      //   globalStore.currentSession.type = RoomTypeEnum.Single
+      if (route?.path && route?.path !== '/') {
+        globalStore.currentSession.roomId = msg.message.roomId
+        globalStore.currentSession.type = RoomTypeEnum.Single
       if (!current) {
-        result = await apis.sessionDetail({ id: msg.message.roomId }).send()
+        // result = await apis.sessionDetail({ id: msg.message.roomId }).send()
       }
       //   Router.push('/')
-      // }
+      }
       updateSessionLastActiveTime(msg.message.roomId, result)
     }
 

@@ -24,7 +24,7 @@ import { useRecording } from '@/hooks/useRecording'
 // import { useMockMessage } from '@/hooks/useMockMessage'
 // import { generateBody } from '@/utils'
 // import renderReplyContent from '@/utils/renderReplyContent'
-// import eventBus from '@/utils/eventBus'
+import eventBus from '@/utils/eventBus'
 import throttle from 'lodash/throttle'
 
 const client = judgeClient()
@@ -59,40 +59,40 @@ const focusMsgInput = () => {
 //   isAudio.value = false
 // }
 
-// onMounted(() => {
-//   eventBus.on('onSelectPerson', onSelectPerson)
-//   eventBus.on('focusMsgInput', focusMsgInput)
-// })
-// onBeforeUnmount(() => {
-//   eventBus.off('onSelectPerson', onSelectPerson)
-//   eventBus.off('focusMsgInput', focusMsgInput)
-// })
+onMounted(() => {
+  // eventBus.on('onSelectPerson', onSelectPerson)
+  eventBus.on('focusMsgInput', focusMsgInput)
+})
+onBeforeUnmount(() => {
+  // eventBus.off('onSelectPerson', onSelectPerson)
+  eventBus.off('focusMsgInput', focusMsgInput)
+})
 
 // 发送消息
-// const send = (msgType: MsgEnum, body: any) => {
-//   apis
-//     .sendMsg({ roomId: globalStore.currentSession.roomId, msgType, body })
-//     .send()
-//     .then((res) => {
-//       if (res.message.type === MsgEnum.TEXT) {
-//         chatStore.pushMsg(res) // 消息列表新增一条消息
-//       } else {
-//         // 更新上传状态下的消息
-//         chatStore.updateMsg(tempMessageId.value, res)
-//       }
-//       inputMsg.value = '' // 清空输入列表
-//       onClearReply() // 置空回复的消息
+const send = (msgType: MsgEnum, body: any) => {
+  apis
+    .sendMsg({ roomId: globalStore.currentSession.roomId, msgType, body })
+    .send()
+    .then((res) => {
+      if (res.message.type === MsgEnum.TEXT) {
+        chatStore.pushMsg(res) // 消息列表新增一条消息
+      } else {
+        // 更新上传状态下的消息
+        chatStore.updateMsg(tempMessageId.value, res)
+      }
+      inputMsg.value = '' // 清空输入列表
+      onClearReply() // 置空回复的消息
 
-//       // 发完消息就要刷新会话列表，
-//       //  FIXME 如果当前会话已经置顶了，可以不用刷新
-//       chatStore.updateSessionLastActiveTime(globalStore.currentSession.roomId)
-//     })
-//     .finally(() => {
-//       isSending.value = false
-//       focusMsgInput() // 输入框重新获取焦点
-//       chatStore.chatListToBottomAction?.() // 滚动到消息列表底部
-//     })
-// }
+      // 发完消息就要刷新会话列表，
+      //  FIXME 如果当前会话已经置顶了，可以不用刷新
+      chatStore.updateSessionLastActiveTime(globalStore.currentSession.roomId)
+    })
+    .finally(() => {
+      isSending.value = false
+      focusMsgInput() // 输入框重新获取焦点
+      chatStore.chatListToBottomAction?.() // 滚动到消息列表底部
+    })
+}
 
 const sendMsgHandler = () => {
   // 空消息或正在发送时禁止发送
@@ -101,11 +101,11 @@ const sendMsgHandler = () => {
   }
 
   isSending.value = true
-  // send(MsgEnum.TEXT, {
-  //   content: inputMsg.value,
-  //   replyMsgId: currentMsgReply.value.message?.id,
-  //   atUidList: mentionList.value.map((item) => item.uid),
-  // })
+  send(MsgEnum.TEXT, {
+    content: inputMsg.value,
+    replyMsgId: currentMsgReply.value.message?.id,
+    atUidList: mentionList.value.map((item) => item.uid),
+  })
 }
 
 const loginStore = useWsLoginStore() // 显示登录框
@@ -113,7 +113,7 @@ const userStore = useUserStore() // 是否已登录
 const emojiStore = useEmojiStore()
 // const groupStore = useGroupStore()
 const isSign = computed(() => userStore.isSign)
-// const currentMsgReply = computed(() => (userStore.isSign && chatStore.currentMsgReply) || {})
+const currentMsgReply = computed(() => (userStore.isSign && chatStore.currentMsgReply) || {})
 // const currentReplUid = computed(() => currentMsgReply?.value.fromUser?.uid as number)
 // const currentReplyUser = useUserInfo(currentReplUid)
 const emojiList = computed(() => emojiStore.emojiList)
@@ -128,8 +128,8 @@ const emojiList = computed(() => emojiStore.emojiList)
 //   return renderReplyContent(name, type, currentMsgReply?.value.message?.body?.content)
 // }
 
-// // 置空回复的消息
-// const onClearReply = () => (chatStore.currentMsgReply = {})
+// 置空回复的消息
+const onClearReply = () => (chatStore.currentMsgReply = {})
 // 插入表情
 const insertEmoji = (emoji: string) => {
   const input = mentionRef.value?.input
