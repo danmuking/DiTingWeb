@@ -8,12 +8,12 @@ export default {
   // -------------- 聊天室相关 ---------------
   getSessionList: `${prefix}/api/contact/getContactList`, // 会话列表
   getMsgList: `${prefix}/api/contact/getMessageList`,
+  getUserInfoBatch: `${prefix}/api/contact/userInfo/batch`, // 批量获取成员详细信息
 
 
 
   
   getMemberStatistic: `${prefix}/capi/chat/public/member/statistic`,
-  getUserInfoBatch: `${prefix}/capi/user/public/summary/userInfo/batch`,
   getBadgesBatch: `${prefix}/capi/user/public/badges/batch`,
   getAllUserBaseInfo: `${prefix}/capi/room/group/member/list`, // 房间内的所有群成员列表-@专用
   sendMsg: `${prefix}/capi/chat/msg`,

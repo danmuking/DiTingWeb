@@ -37,6 +37,11 @@ export default {
     getRequest<ListResponse<SessionItem>>(urls.getSessionList, params),
   /** 获取消息列表 */
   getMsgList: (params?: any) => getRequest<ListResponse<MessageType>>(urls.getMsgList, params),
+  /** 批量获取成员详细信息 */
+  getUserInfoBatch: (users: CacheUserReq[]) =>
+    postRequest<CacheUserItem[]>(urls.getUserInfoBatch, { list: users }),
+
+
 
 
   /** 获取群成员列表 */
@@ -46,9 +51,7 @@ export default {
   /** 房间内的所有群成员列表-@专用 */
   getAllUserBaseInfo: (params?: any) =>
     getRequest<Pick<CacheUserItem, 'avatar' | 'name' | 'uid'>[]>(urls.getAllUserBaseInfo, params),
-  /** 批量获取成员详细信息 */
-  getUserInfoBatch: (users: CacheUserReq[]) =>
-    postRequest<CacheUserItem[]>(urls.getUserInfoBatch, { reqList: users }),
+  
   /** 批量获取徽章信息 */
   getBadgesBatch: (badges: CacheBadgeReq[]) =>
     postRequest<CacheBadgeItem[]>(urls.getBadgesBatch, { reqList: badges }),

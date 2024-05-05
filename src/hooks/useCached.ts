@@ -12,10 +12,10 @@ export const useUserInfo = (uid?: number | ComputedRef<number | undefined> | Ref
   const userInfo = computed(() => (uid && cachedStore.userCachedList[toValue(uid as number)]) || {})
   // TODO: 未完成
   // // 如果没有就请求
-  // const resultUid = toValue(uid as number)
-  // if (resultUid && Object.keys(userInfo.value).length === 0) {
-  //   cachedStore.getBatchUserInfo([resultUid])
-  // }
+  const resultUid = toValue(uid as number)
+  if (resultUid && Object.keys(userInfo.value).length === 0) {
+    cachedStore.getBatchUserInfo([resultUid])
+  }
   return userInfo
 }
 

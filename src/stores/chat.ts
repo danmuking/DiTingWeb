@@ -187,7 +187,7 @@ export const useChatStore = defineStore('chat', () => {
     })
     // 获取用户信息缓存
     // TODO: 未完成
-    // cachedStore.getBatchUserInfo([...uidCollectYet])
+    cachedStore.getBatchUserInfo([...uidCollectYet])
     // 为保证获取的历史消息在前面
     const newList = [...computedList, ...chatMessageList.value]
     currentMessageMap.value?.clear() // 清空Map
