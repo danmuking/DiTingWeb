@@ -10,6 +10,7 @@
   --color-light-2: #606266;
   --color-light-3: #909399;
   --color-light-4: #A8ABB2;
+  --color-me: #409EFF;
 
   /* font */
   --font-placeholder: #a8abb2;
@@ -18,6 +19,7 @@
   --font-gray: #909399;
   --font-light: #A8ABB2;
   --font-light-1: #eee;
+  --font-light-2: #ecf5ff;
   --font-pink: #fe2c55;
 
   /* 背景色 */
@@ -28,7 +30,7 @@
   --background-dark: rgba(39, 42, 55, 40%);
   --background-mask: rgba(198, 226, 255,40%);
   --background-1: #2b2d31;
-  --background-2: #383c4b;
+  --background-2: #ecf5ff;
   --background-3: #ecf5ff;
   --background-4: #efe2bb;
 

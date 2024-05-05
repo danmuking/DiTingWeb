@@ -56,7 +56,7 @@
       padding: 8px 12px;
       font-size: 15px;
       line-height: 22px;
-      color: var(--font-main);
+      color: var(--font-base);
       word-break: break-word;
       background-color: var(--background-2);
       border-radius: 2px 18px 18px;
@@ -507,7 +507,8 @@
     }
 
     .text {
-      background-color: var(--color-primary);
+      background-color: var(--color-me);
+      color: var(--font-light-2);
 
       &-mention {
         color: #f1f1f1;
