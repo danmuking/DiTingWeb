@@ -35,6 +35,8 @@ export default {
   // 获取会话列表
   getSessionList: (params?: any) =>
     getRequest<ListResponse<SessionItem>>(urls.getSessionList, params),
+  /** 获取消息列表 */
+  getMsgList: (params?: any) => getRequest<ListResponse<MessageType>>(urls.getMsgList, params),
 
 
   /** 获取群成员列表 */
@@ -50,8 +52,7 @@ export default {
   /** 批量获取徽章信息 */
   getBadgesBatch: (badges: CacheBadgeReq[]) =>
     postRequest<CacheBadgeItem[]>(urls.getBadgesBatch, { reqList: badges }),
-  /** 获取消息列表 */
-  getMsgList: (params?: any) => getRequest<ListResponse<MessageType>>(urls.getMsgList, params),
+  
   /** 发送消息 */
   sendMsg: (data?: MessageReq) => postRequest<MessageType>(urls.sendMsg, data),
   /** 标记消息，点赞等 */

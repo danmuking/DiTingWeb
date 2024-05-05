@@ -29,8 +29,8 @@ export const useContactStore = defineStore('contact', () => {
       })
     if (!data) return
     isFresh
-      ? contactsList.splice(0, contactsList.length, ...data.list)
-      : contactsList.push(...data.list)
+      ? contactsList.splice(0, contactsList.length, ...data.data)
+      : contactsList.push(...data.data)
     contactsOptions.cursor = data.cursor
     contactsOptions.isLast = data.isLast
     contactsOptions.isLoading = false

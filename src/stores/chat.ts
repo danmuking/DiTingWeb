@@ -248,11 +248,11 @@ export const useChatStore = defineStore('chat', () => {
       // globalStore.currentSession.type = data.list[0].type
       // 用会话列表第一个去请求消息列表
       // TODO: 未完成
-      // getMsgList()
+      getMsgList()
       // // 如果当前房间的类型是群组，获取群组用户列表
       // currentRoomType.value === RoomTypeEnum.Group && groupStore.getGroupUserList(true)
-      // // 如果用户已登录，初始化所有用户的基本信息
-      // userStore.isSign && cachedStore.initAllUserBaseInfo()
+      // 如果用户已登录，初始化所有用户的基本信息
+      userStore.isSign && cachedStore.initAllUserBaseInfo()
       // // 获取联系人列表
       // contactStore.getContactList(true)
     }

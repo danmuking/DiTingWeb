@@ -218,15 +218,6 @@ export type MsgUserType = {
   username: string
   /** 头像 */
   avatar: string
-  /** 归属地 */
-  locPlace: string
-  /** 徽章 */
-  badge?: {
-    /** 徽章地址 */
-    img: string
-    /** 描述 */
-    describe: string // 描述
-  }
 }
 
 /**

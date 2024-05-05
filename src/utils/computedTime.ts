@@ -42,6 +42,7 @@ const checkTimeInterval = (cur: MessageType, pre: MessageType) => {
   }
 }
 
+// TODO:未完成
 // 定义一个函数，用于计算消息列表中的时间间隔
 export const computedTimeBlock = (list: MessageType[], needFirst = true) => {
   // 如果 list 不存在或者为空，直接返回一个空数组
