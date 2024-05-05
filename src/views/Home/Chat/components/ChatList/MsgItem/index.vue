@@ -67,9 +67,9 @@ const isShowMenu = ref(false) // 是否显示菜单
 const isShowUserMenu = ref(false) // 是否显示用户名及头像右键菜单
 // 弹出定位
 const menuOptions = ref({ x: 0, y: 0 })
-const { isLike, isDisLike, likeCount, dislikeCount, onLike, onDisLike } = useLikeToggle(
-  props.msg.message,
-)
+// const { isLike, isDisLike, likeCount, dislikeCount, onLike, onDisLike } = useLikeToggle(
+//   props.msg.message,
+// )
 const isRecall = computed(() => [MsgEnum.RECALL, MsgEnum.SYSTEM].includes(message.value.type))
 
 // 滚动到消息
@@ -181,7 +181,9 @@ const currentReadList = (msgId: number) => {
 </script>
 
 <template>
-  <span v-if="isShowTimeBlock && msg.timeBlock" class="send-time-block">{{ msg.timeBlock }}</span>
+  <span v-if="isShowTimeBlock && msg.timeBlock" class="send-time-block">{{
+    msg.timeBlock
+  }}</span>
   <span v-if="isRecall" class="send-time-block">{{ message.body }}</span>
   <div ref="msgVisibleEl">
     <transition name="remove">
@@ -199,21 +201,24 @@ const currentReadList = (msgId: number) => {
         <div class="chat-item-box" ref="boxRef">
           <div class="chat-item-user-info">
             <!-- 用户徽章悬浮说明 -->
-            <el-tooltip
+            <!-- <el-tooltip
               effect="dark"
               :content="badgeInfo?.describe"
               :placement="isCurrentUser ? 'top-end' : 'top-start'"
               :teleported="false"
             >
-              <!-- 用户徽章 -->
+              <-- 用户徽章 ->
               <img v-show="badgeInfo?.img" class="user-badge" :src="badgeInfo?.img" />
-            </el-tooltip>
+            </el-tooltip> -->
             <!-- 用户名 -->
-            <span class="user-name" @contextmenu.prevent.stop="handleUserRightClick($event)">
+            <span
+              class="user-name"
+              @contextmenu.prevent.stop="handleUserRightClick($event)"
+            >
               {{ userInfo.name }}
             </span>
             <!-- 消息归属地 -->
-            <span class="user-ip">({{ userInfo.locPlace || '未知' }})</span>
+            <!-- <span class="user-ip">({{ userInfo.locPlace || '未知' }})</span> -->
             <!-- 消息发送时间 -->
             <span class="send-time" v-if="isShowTime">
               {{ formatTimestamp(msg.message.sendTime) }}
@@ -271,39 +276,17 @@ const currentReadList = (msgId: number) => {
               {{ message.body.reply.username }}: {{ message.body.reply.body }}
             </span>
           </div>
-          <!-- 点赞数量和倒赞数量及动画 -->
-          <div v-if="likeCount + dislikeCount > 0" class="extra">
-            <transition name="fade">
-              <span
-                v-if="likeCount > 0"
-                :class="['extra-item like', { active: isLike }]"
-                v-login="onLike"
-              >
-                <Icon icon="like" />
-                <transition name="count-up" mode="out-in">
-                  <span class="count" :key="likeCount">{{ likeCount }}</span>
-                </transition>
-              </span>
-            </transition>
-            <transition name="fade">
-              <span
-                v-if="dislikeCount > 0"
-                :class="['extra-item dlike', { active: isDisLike }]"
-                v-login="onDisLike"
-              >
-                <Icon icon="dislike" :size="17" />
-                <transition name="count-up" mode="out-in">
-                  <span class="count" :key="dislikeCount">{{ dislikeCount }}</span>
-                </transition>
-              </span>
-            </transition>
-          </div>
+          <!-- TODO -->
         </div>
       </div>
     </transition>
   </div>
   <ContextMenu v-model:show="isShowMenu" :options="menuOptions" :msg="msg" />
-  <UserContextMenu v-model:show="isShowUserMenu" :options="menuOptions" :uid="msg.fromUser.uid" />
+  <UserContextMenu
+    v-model:show="isShowUserMenu"
+    :options="menuOptions"
+    :uid="msg.fromUser.uid"
+  />
 </template>
 
 <style lang="scss" src="./styles.scss" />

@@ -303,13 +303,16 @@ export default defineComponent({
     })
 
     return () => {
-      const { padFront, padBehind } = range.value!
+      try{const { padFront, padBehind } = range.value!
       return (
         <div ref={rootRef} onScroll={onScroll}>
           <div style={{ padding: `${padFront}px 0px ${padBehind}px` }}>{getRenderSlots()}</div>
           <div ref={shepherd} style={{ width: '100%', height: '0px' }} />
         </div>
-      )
+      )}
+      catch (error) {
+        console.error('Error during render:', error)
+      }
     }
   },
 })

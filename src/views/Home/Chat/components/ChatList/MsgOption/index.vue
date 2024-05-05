@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useLikeToggle } from '@/hooks/useLikeToggle'
+// import { useLikeToggle } from '@/hooks/useLikeToggle'
 import { useChatStore } from '@/stores/chat'
 import type { MessageType } from '@/services/types'
 import eventBus from '@/utils/eventBus'
@@ -8,7 +8,7 @@ const props = defineProps<{ msg: MessageType }>()
 
 const chatStore = useChatStore()
 
-const { isLike, isDisLike, onLike, onDisLike } = useLikeToggle(props.msg.message)
+// const { isLike, isDisLike, onLike, onDisLike } = useLikeToggle(props.msg.message)
 
 /**
  * 回复消息
@@ -31,10 +31,10 @@ const onReplyMsg = async (msgFromUser: MessageType) => {
     <span class="msg-option-item" title="不喜欢">
       <Icon
         icon="dislike"
-        :size="15"
-        :class="[{ 'dislike-active': isDisLike }]"
-        v-login="() => onDisLike()"
-      />
+        :size="15">
+      <!-- TODO -->
+      </Icon>
+
     </span>
   </div>
 </template>

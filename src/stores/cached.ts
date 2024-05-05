@@ -56,13 +56,13 @@ export const useCachedStore = defineStore(
         }
         userCachedList[item.uid] = curItemResult
 
-        // 收集徽章 id并缓存
-        // 可以改成 itemIds，可以更快收集完成。
-        const wearingItemId = item.wearingItemId
-        wearingItemId && itemIdSet.add(wearingItemId)
+        // // 收集徽章 id并缓存
+        // // 可以改成 itemIds，可以更快收集完成。
+        // const wearingItemId = item.wearingItemId
+        // wearingItemId && itemIdSet.add(wearingItemId)
       })
-      // 批量请求徽章详情
-      getBatchBadgeInfo([...itemIdSet])
+      // // 批量请求徽章详情
+      // getBatchBadgeInfo([...itemIdSet])
     }
 
     /** 批量获取用户徽章详细信息 */

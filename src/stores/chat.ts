@@ -172,25 +172,29 @@ export const useChatStore = defineStore('chat', () => {
     /** 收集需要请求用户详情的 uid */
     const uidCollectYet: Set<number> = new Set() // 去重用
     computedList.forEach((msg) => {
-      const replyItem = msg.message.body?.reply
-      if (replyItem?.id) {
-        const messageIds = currentReplyMap.value?.get(replyItem.id) || []
-        messageIds.push(msg.message.id)
-        currentReplyMap.value?.set(replyItem.id, messageIds)
+      // TODO: 未完成
+      // const replyItem = msg.message.body?.reply
+      // if (replyItem?.id) {
+      //   const messageIds = currentReplyMap.value?.get(replyItem.id) || []
+      //   messageIds.push(msg.message.id)
+      //   currentReplyMap.value?.set(replyItem.id, messageIds)
 
         // 查询被回复用户的信息，被回复的用户信息里暂时无 uid
         // collectUidItem(replyItem.uid)
-      }
+      // }
       // 查询消息发送者的信息
       uidCollectYet.add(msg.fromUser.uid)
     })
     // 获取用户信息缓存
-    cachedStore.getBatchUserInfo([...uidCollectYet])
+    // TODO: 未完成
+    // cachedStore.getBatchUserInfo([...uidCollectYet])
     // 为保证获取的历史消息在前面
     const newList = [...computedList, ...chatMessageList.value]
     currentMessageMap.value?.clear() // 清空Map
+    debugger
     newList.forEach((msg) => {
       currentMessageMap.value?.set(msg.message.id, msg)
+      console.log(currentMessageMap.value);
     })
 
     // 如果 currentMessageOptions.value 存在，更新其 cursor、isLast 和 isLoading 属性

@@ -5,6 +5,7 @@ import { useChatStore } from '@/stores/chat'
 import { useGlobalStore } from '@/stores/global'
 import renderReplyContent from '@/utils/renderReplyContent'
 import { MsgEnum, RoomTypeEnum } from '@/enums'
+import { useUserInfo } from '@/hooks/useCached'
 
 const chatStore = useChatStore()
 const globalStore = useGlobalStore()
@@ -21,8 +22,8 @@ const sessionList = computed(() =>
     let LastUserMsg = ''
     if (lastMsg) {
       // TODO:未完成
-      // const lastMsgUserName = useUserInfo(lastMsg.fromUser.uid)
-      const lastMsgUserName = "test"
+      const lastMsgUserName = useUserInfo(lastMsg.fromUser.uid)
+      // const lastMsgUserName = "test"
       LastUserMsg =
         lastMsg.message?.type === MsgEnum.RECALL
           ? `${lastMsgUserName.value.name}:'撤回了一条消息'`

@@ -299,8 +299,6 @@ export type MsgType = {
   body: TextBody | ImageBody | VoiceBody | VideoBody | FileBody | EmojiBody | any
   /** 发送时间戳 */
   sendTime: number
-  /** 消息互动信息 */
-  messageMark: MessageMarkType
 }
 
 export type ReplyType = {
