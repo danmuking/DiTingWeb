@@ -23,7 +23,7 @@ const currentSession = computed(() => globalStore.currentSession)
         <SendBar />
       </div>
     </div>
-    <UserList v-show="true" />
+    <UserList v-show="currentSession.type === RoomTypeEnum.Group" />
   </div>
 </template>
 

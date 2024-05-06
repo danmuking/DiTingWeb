@@ -396,8 +396,8 @@ export type SessionItem = {
   // hot_Flag: IsAllUserEnum
   
   
-  // /** 房间类型 1群聊 2单聊 */
-  // type: RoomTypeEnum
+  /** 房间类型 1群聊 2单聊 */
+  type: RoomTypeEnum
   
 }
 

@@ -43,11 +43,12 @@ export default {
   /** 发送消息 */
   sendMsg: (data?: MessageReq) => postRequest<MessageType>(urls.sendMsg, data),
 
+  
 
 
 
-  /** 获取群成员列表 */
-  getGroupList: (params?: any) => getRequest<ListResponse<UserItem>>(urls.getGroupUserList, params),
+
+  
   /** 获取群成员统计 */
   getMemberStatistic: () => getRequest<GroupStatisticType>(urls.getMemberStatistic),
   /** 房间内的所有群成员列表-@专用 */
