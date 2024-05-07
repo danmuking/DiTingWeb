@@ -225,12 +225,10 @@ export const useChatStore = defineStore('chat', () => {
     if (!data) return
     // 如果需要刷新，替换会话列表，否则将新的会话添加到会话列表的末尾
     // debugger
-    console.log(data.data);
     // debugger
     isFresh
       ? sessionList.splice(0, sessionList.length, ...data.data)
       : sessionList.push(...data.data)
-    console.log(sessionList);
     // 更新游标、是否已经获取到最后一条会话和正在加载会话的状态
     sessionOptions.cursor = data.cursor
     sessionOptions.isLast = data.isLast
@@ -290,10 +288,10 @@ export const useChatStore = defineStore('chat', () => {
   const updateSessionLastActiveTime = (roomId: number, room?: SessionItem) => {
     const session = sessionList.find((item) => item.roomId === roomId)
     if (session) {
-      Object.assign(session, { activeTime: Date.now() })
+      Object.assign(session, { lastTime: Date.now() })
     } else if (room) {
       const newItem = cloneDeep(room)
-      newItem.activeTime = Date.now()
+      newItem.lastTime = Date.now()
       sessionList.unshift(newItem)
     }
     sortAndUniqueSessionList()
@@ -362,7 +360,7 @@ export const useChatStore = defineStore('chat', () => {
     } else {
       // 且当前路由在 聊天 内
       if (route?.path && route?.path === '/') {
-        apis.markMsgRead({ roomId: currentRoomId.value }).send()
+        // apis.markMsgRead({ roomId: currentRoomId.value }).send()
       }
     }
 
