@@ -64,11 +64,11 @@ export const useContactStore = defineStore('contact', () => {
         requestFriendsOptions.isLoading = false
       })
     // 每次加载完新的好友邀请列表都要更新申请未读数
-    getNewFriendCount()
+    // getNewFriendCount()
     if (!data) return
     isFresh
-      ? requestFriendsList.splice(0, requestFriendsList.length, ...data.list)
-      : requestFriendsList.push(...data.list)
+      ? requestFriendsList.splice(0, requestFriendsList.length, ...data.data)
+      : requestFriendsList.push(...data.data)
     requestFriendsOptions.cursor = data.cursor
     requestFriendsOptions.isLast = data.isLast
     requestFriendsOptions.isLoading = false

@@ -10,6 +10,8 @@ export default {
   getMsgList: `${prefix}/api/contact/getMessageList`,
   getUserInfoBatch: `${prefix}/api/contact/userInfo/batch`, // 批量获取成员详细信息
   sendMsg: `${prefix}/api/chat/msg`,
+  // -------------- 好友相关 ---------------
+  requestFriendList: `${prefix}/api/user/getApplyList`, // 好友申请列表
 
 
 
@@ -31,7 +33,6 @@ export default {
 
   // -------------- 好友相关 ---------------
   getContactList: `${prefix}/capi/user/friend/page`, // 联系人列表
-  requestFriendList: `${prefix}/capi/user/friend/apply/page`, // 好友申请列表
   sendAddFriendRequest: `${prefix}/capi/user/friend/apply`, // 申请好友
   deleteFriend: `${prefix}/capi/user/friend`, // 删除好友
   newFriendCount: `${prefix}/capi/user/friend/apply/unread`, // 申请未读数

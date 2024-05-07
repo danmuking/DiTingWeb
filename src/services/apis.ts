@@ -42,6 +42,9 @@ export default {
     postRequest<CacheUserItem[]>(urls.getUserInfoBatch, { list: users }),
   /** 发送消息 */
   sendMsg: (data?: MessageReq) => postRequest<MessageType>(urls.sendMsg, data),
+  /** 获取好友申请列表 */
+  requestFriendList: (params?: any) =>
+    getRequest<ListResponse<RequestFriendItem>>(urls.requestFriendList, { params }),
 
   
 
@@ -85,9 +88,6 @@ export default {
   /** 获取联系人列表 */
   getContactList: (params?: any) =>
     getRequest<ListResponse<ContactItem>>(urls.getContactList, { params }),
-  /** 获取好友申请列表 */
-  requestFriendList: (params?: any) =>
-    getRequest<ListResponse<RequestFriendItem>>(urls.requestFriendList, { params }),
   /** 发送添加好友请求 */
   sendAddFriendRequest: (params: { targetUid: number; msg: string }) =>
     postRequest<EmojiItem[]>(urls.sendAddFriendRequest, params),
