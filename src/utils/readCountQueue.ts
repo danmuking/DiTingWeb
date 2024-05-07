@@ -24,21 +24,21 @@ const onRemoveReadCountTask = ({ msgId }: { msgId: number }) => {
   queue.delete(msgId)
 }
 const task = () => {
-  // 10s 了上个请求还未完成就中断掉
-  request?.abort()
-  // 如果队列中有数据就开始请求
-  if (queue.size > 0) {
-    // 开始新请求
-    request = apis.getMsgReadCount({ params: { msgIds: [...queue] } })
-    // 发送请求
-    request.send().then((res) => {
-      // 已读未读数
-      const result = new Map<number, MsgReadUnReadCountType>()
-      res.forEach((item) => result.set(item.msgId, item))
-      eventBus.emit('onGetReadCount', result)
-      request = null
-    })
-  }
+  // // 10s 了上个请求还未完成就中断掉
+  // request?.abort()
+  // // 如果队列中有数据就开始请求
+  // if (queue.size > 0) {
+  //   // 开始新请求
+  //   request = apis.getMsgReadCount({ params: { msgIds: [...queue] } })
+  //   // 发送请求
+  //   request.send().then((res) => {
+  //     // 已读未读数
+  //     const result = new Map<number, MsgReadUnReadCountType>()
+  //     res.forEach((item) => result.set(item.msgId, item))
+  //     eventBus.emit('onGetReadCount', result)
+  //     request = null
+  //   })
+  // }
 }
 
 // 初始化监听
