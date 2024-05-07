@@ -25,7 +25,7 @@ class WS {
   #connectReady = false
 
   constructor() {
-    this.initConnect()
+    
     // 收到消息
     worker.addEventListener('message', this.onWorkerMsg)
 

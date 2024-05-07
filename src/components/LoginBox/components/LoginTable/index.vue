@@ -14,6 +14,8 @@ import { OnlineEnum, ChangeTypeEnum, RoomTypeEnum } from '@/enums'
 import type {
   LoginSuccessResType,
 } from '@/services/types'
+import wsIns from '@/utils/websocket'
+
 interface LoginForm {
   username: string;
   password: string;
@@ -61,6 +63,8 @@ const login = () => {
       computedToken.clear()
       computedToken.get()
       loginStore.loginStatus = LoginStatus.Success
+      // 连接websocket
+      wsIns.initConnect()
       // 获取用户详情
       userStore.getUserDetailAction()
       // 关闭登录弹窗
