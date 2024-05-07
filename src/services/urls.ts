@@ -12,6 +12,7 @@ export default {
   sendMsg: `${prefix}/api/chat/msg`,
   // -------------- 好友相关 ---------------
   requestFriendList: `${prefix}/api/user/getApplyList`, // 好友申请列表
+  getContactList: `${prefix}/api/user/getFriendList`, // 联系人列表
 
 
 
@@ -32,7 +33,6 @@ export default {
   getEmoji: `${prefix}/capi/user/emoji/list`, // 查询表情包
 
   // -------------- 好友相关 ---------------
-  getContactList: `${prefix}/capi/user/friend/page`, // 联系人列表
   sendAddFriendRequest: `${prefix}/capi/user/friend/apply`, // 申请好友
   deleteFriend: `${prefix}/capi/user/friend`, // 删除好友
   newFriendCount: `${prefix}/capi/user/friend/apply/unread`, // 申请未读数
