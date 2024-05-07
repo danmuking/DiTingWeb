@@ -13,7 +13,6 @@ import { useGroupStore } from '@/stores/group'
 import { useContactStore } from '@/stores/contacts'
 import shakeTitle from '@/utils/shakeTitle'
 import notify from '@/utils/notification'
-
 export const pageSize = 20
 // 标识是否第一次请求
 let isFirstInit = false
@@ -302,6 +301,22 @@ export const useChatStore = defineStore('chat', () => {
     return sessionList.find((item) => item.roomId === roomId) as SessionItem
   }
 
+  const getNewSessions = async ()=>{
+    // 获取本地最新的会话
+    const session = sessionList[0]
+    // 请求所有时间大于最新会话时间的会话
+    const data = await apis
+      .getSessionList({
+        params: {
+          timestamp: session.lastTime,
+        },
+      })
+      .send()
+    if (!data) return
+    // 将新会话添加到会话列表的最前面
+    sessionList.unshift(...data.data)
+  }
+
   const pushMsg = async (msg: MessageType) => {
     const current = messageMap.get(msg.message.roomId)
     current?.set(msg.message.id, msg)
@@ -504,5 +519,6 @@ export const useChatStore = defineStore('chat', () => {
     currentSessionInfo,
     getMessage,
     removeContact,
+    getNewSessions,
   }
 })

@@ -6,7 +6,9 @@ export default {
   userRegister: `${prefix}/api/public/register`, // 注册
 
   // -------------- 聊天室相关 ---------------
+  // FIXME:这两个接口是否可以合并
   getSessionList: `${prefix}/api/contact/getContactList`, // 会话列表
+  getNewSessionList: `${prefix}/api/contact/getNewContactList`, // 会话列表
   getMsgList: `${prefix}/api/contact/getMessageList`,
   getUserInfoBatch: `${prefix}/api/contact/userInfo/batch`, // 批量获取成员详细信息
   sendMsg: `${prefix}/api/chat/msg`,

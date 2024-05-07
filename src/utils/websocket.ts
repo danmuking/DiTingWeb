@@ -171,7 +171,9 @@ class WS {
       }
       // 收到消息
       case WsResponseMessageType.ReceiveMessage: {
-        chatStore.pushMsg(params.data as MessageType)
+        // 刷新会话列表
+        // chatStore.pushMsg(params.data as MessageType)
+        chatStore.getNewSessions()
         break
       }
       // 用户下线

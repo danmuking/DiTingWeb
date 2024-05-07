@@ -45,6 +45,9 @@ export default {
   /** 获取好友申请列表 */
   requestFriendList: (params?: any) =>
     getRequest<ListResponse<RequestFriendItem>>(urls.requestFriendList, { params }),
+  // 获取更新的会话列表
+  getNewSessionList: (params?: any) =>
+    getRequest<ListResponse<SessionItem>>(urls.getNewSessionList, params),
 
   
 
