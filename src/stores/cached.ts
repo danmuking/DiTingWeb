@@ -15,7 +15,7 @@ export const useCachedStore = defineStore(
     const userCachedList = reactive<Record<number, Partial<CacheUserItem>>>({})
     const badgeCachedList = reactive<Record<number, Partial<CacheBadgeItem>>>({})
 
-    const currentRoomId = computed(() => globalStore.currentSession.roomId)
+    const currentRoomId = computed(() => globalStore.currentSession==undefined?1:globalStore.currentSession.roomId)
 
     const atUsersMap = reactive<Record<number, BaseUserItem[]>>({ [currentRoomId.value]: [] }) // 消息Map
 

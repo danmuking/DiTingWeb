@@ -2,11 +2,20 @@
 import { computed, ref } from 'vue'
 import { judgeClient } from '@/utils/detectDevice'
 import { useUserStore } from '@/stores/user'
+import { useGroupStore } from '@/stores/group'
+import { useGlobalStore } from '@/stores/global'
+
+
 
 const client = judgeClient()
+const visible = ref(false)
 const userStore = useUserStore()
+const groupStore = useGroupStore()
+const globalStore = useGlobalStore()
+
 const showSettingBox = () => (visible.value = true)
 const avatar = computed(() => userStore?.userInfo.avatar)
+// const unReadMark = computed(() => globalStore.unReadMark)
 
 // // 是否PC端
 const isPc = computed(() => client === 'PC')
@@ -58,6 +67,26 @@ const menuList = [
 <template>
   <aside class="side-toolbar">
     <Avatar :src="userStore.isSign ? avatar : ''" :size="isPc ? 50 : 40" :shape="'square'" v-login="showSettingBox" />
+    <div class="tool-icons">
+      <div class="tool-icons">
+      <!-- 会话 -->
+      <router-link exactActiveClass="tool-icon-active" to="/">
+        <el-badge
+          :max="99"
+        >
+          <Icon class="tool-icon" icon="chat" :size="28" />
+        </el-badge>
+      </router-link>
+      <!-- 联系人 -->
+      <router-link v-login-show exactActiveClass="tool-icon-active" to="/contact">
+        <el-badge
+          :max="99"
+        >
+          <Icon class="tool-icon" icon="group" :size="28" />
+        </el-badge>
+      </router-link>
+    </div>
+    </div>
     <div class="menu">
       <el-tooltip effect="dark" :placement="isPc ? 'right' : 'bottom'">
         <template #content>

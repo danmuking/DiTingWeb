@@ -7,7 +7,7 @@ import { clearQueue, readCountQueue } from '@/utils/readCountQueue'
 import apis from '@/services/apis'
 
 export const useGlobalStore = defineStore('global', () => {
-  const chatStore = useChatStore()
+  
   const unReadMark = reactive<{ newFriendUnreadCount: number; newMsgUnreadCount: number }>({
     newFriendUnreadCount: 0,
     newMsgUnreadCount: 0,
@@ -20,6 +20,7 @@ export const useGlobalStore = defineStore('global', () => {
     roomId: 1,
     type: RoomTypeEnum.Group,
   })
+  const chatStore = useChatStore()
   /** 点击联系人选中的联系人项 */
   const currentSelectedContact = ref<ContactItem | RequestFriendItem>()
   const addFriendModalInfo = reactive<{ show: boolean; uid?: number }>({
