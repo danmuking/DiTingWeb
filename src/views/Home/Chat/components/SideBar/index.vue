@@ -45,19 +45,26 @@ const sessionList = computed(() =>
 const load = () => {
   chatStore.getSessionList()
 }
-
+// 选中的聊天对话
+const currentSession = computed(() => globalStore.currentSession)
+// 选中会话
+const onSelectSelectSession = (roomId: number, roomType: RoomTypeEnum) => {
+  globalStore.currentSession.roomId = roomId
+  globalStore.currentSession.type = roomType
+}
 </script>
 
 <template>
   <ul class="chat-message" :infinite-scroll-immediate="false" v-infinite-scroll="load">
     <li
-      v-for="(item, index) in sessionList"
+    v-for="(item, index) in sessionList"
       :key="index"
       :data-room-id="item.roomId"
-      :class="['chat-message-item']"
+      :class="['chat-message-item', { active: currentSession.roomId === item.roomId }]"
+      @click="onSelectSelectSession(item.roomId, item.type)"
     >
       <div class="item-wrapper">
-        <el-badge :value="item.unreadCount" :max="999" :hidden="item.unreadCount < 1" class="item">
+        <el-badge :value="item.unreadCount" :max="99" :hidden="item.unreadCount < 1" class="item">
           <el-avatar shape="circle" :size="38" :src="item.avatar" />
         </el-badge>
         <div class="message-info">

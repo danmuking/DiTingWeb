@@ -128,7 +128,7 @@ export const useChatStore = defineStore('chat', () => {
         if (!currentMessageMap.value) {
           messageMap.set(currentRoomId.value as number, new Map())
         }
-        // getMsgList()
+        getMsgList()
       }
 
       // 群组的时候去请求
@@ -191,7 +191,6 @@ export const useChatStore = defineStore('chat', () => {
     // 为保证获取的历史消息在前面
     const newList = [...computedList, ...chatMessageList.value]
     currentMessageMap.value?.clear() // 清空Map
-    debugger
     newList.forEach((msg) => {
       currentMessageMap.value?.set(msg.message.id, msg)
       console.log(currentMessageMap.value);
@@ -308,7 +307,6 @@ export const useChatStore = defineStore('chat', () => {
   const pushMsg = async (msg: MessageType) => {
     const current = messageMap.get(msg.message.roomId)
     current?.set(msg.message.id, msg)
-    debugger
     // 获取用户信息缓存
     // 尝试取缓存user, 如果有 lastModifyTime 说明缓存过了，没有就一定是要缓存的用户了
     const uid = msg.fromUser.uid
