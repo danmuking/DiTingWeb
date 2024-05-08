@@ -321,7 +321,7 @@ export const useChatStore = defineStore('chat', () => {
     const session = sessionList[0]
     // 请求所有时间大于等于最新会话时间的会话
     const data = await apis
-      .getSessionList({
+      .getNewSessionList({
         params: {
           timestamp: session.lastTime,
         },
@@ -329,12 +329,12 @@ export const useChatStore = defineStore('chat', () => {
       .send()
     if (!data) return
     // 将新会话添加到会话列表的最前面
-    sessionList.unshift(...data.data)
+    sessionList.unshift(...data)
     // 对会话列表进行排序和去重
     sortAndUniqueSessionList()
 
     // 更新会话对应的消息列表
-    for (const sessionItem of data.data) {
+    for (const sessionItem of data) {
       // 如果会话的消息有本地缓存
       if (messageMap.has(sessionItem.roomId)) {
         freshMsgList(sessionItem)
