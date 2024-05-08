@@ -116,7 +116,7 @@ class WS {
   // 收到消息回调
   onMessage = (value: string) => {
     // FIXME 可能需要 try catch,
-    const params: { type: WsResponseMessageType; data: unknown } = JSON.parse(value)
+    const params: { type: WsResponseMessageType; data?: unknown } = JSON.parse(value)
     const loginStore = useWsLoginStore()
     const userStore = useUserStore()
     const chatStore = useChatStore()
