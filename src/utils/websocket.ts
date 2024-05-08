@@ -173,7 +173,10 @@ class WS {
       case WsResponseMessageType.ReceiveMessage: {
         // 刷新会话列表
         // chatStore.pushMsg(params.data as MessageType)
-        chatStore.getNewSessions()
+        // FIXME:会话列表去重
+        chatStore.fresh()
+        // 刷新当期窗口消息
+        chatStore.pushCurrentMsg(params.data as MessageType)
         break
       }
       // 用户下线

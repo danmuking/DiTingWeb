@@ -10,6 +10,7 @@ export default {
   getSessionList: `${prefix}/api/contact/getContactList`, // 会话列表
   getNewSessionList: `${prefix}/api/contact/getNewContactList`, // 会话列表
   getMsgList: `${prefix}/api/contact/getMessageList`,
+  getNewMsgList: `${prefix}/api/contact/getNewMsgList`,
   getUserInfoBatch: `${prefix}/api/contact/userInfo/batch`, // 批量获取成员详细信息
   sendMsg: `${prefix}/api/chat/msg`,
   // -------------- 好友相关 ---------------

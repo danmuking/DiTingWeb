@@ -48,6 +48,9 @@ export default {
   // 获取更新的会话列表
   getNewSessionList: (params?: any) =>
     getRequest<ListResponse<SessionItem>>(urls.getNewSessionList, params),
+    // 获取更新的会话列表
+  getNewMsgList: (params?: any) =>
+  getRequest<MessageType[]>(urls.getNewMsgList, params),
 
   
 

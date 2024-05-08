@@ -18,6 +18,7 @@ export const pageSize = 20
 let isFirstInit = false
 
 export const useChatStore = defineStore('chat', () => {
+
   const route = useRoute()
   const cachedStore = useCachedStore()
   const userStore = useUserStore()
@@ -30,15 +31,19 @@ export const useChatStore = defineStore('chat', () => {
   const currentRoomId = computed(() => globalStore.currentSession?.roomId)
   const currentRoomType = computed(() => globalStore.currentSession?.type)
 
+  // 消息Map
   const messageMap = reactive<Map<number, Map<number, MessageType>>>(
     new Map([[currentRoomId.value, new Map()]]),
-  ) // 消息Map
+  ) 
+  // 游标
   const messageOptions = reactive<
     Map<number, { isLast: boolean; isLoading: boolean; cursor: string }>
   >(new Map([[currentRoomId.value, { isLast: false, isLoading: false, cursor: '' }]]))
+
+  // 回复消息映射
   const replyMapping = reactive<Map<number, Map<number, number[]>>>(
     new Map([[currentRoomId.value, new Map()]]),
-  ) // 回复消息映射
+  ) 
 
   const currentMessageMap = computed({
     get: () => {
@@ -52,6 +57,7 @@ export const useChatStore = defineStore('chat', () => {
       messageMap.set(currentRoomId.value, val as Map<number, MessageType>)
     },
   })
+
   const currentMessageOptions = computed({
     get: () => {
       const current = messageOptions.get(currentRoomId.value as number)
@@ -67,6 +73,7 @@ export const useChatStore = defineStore('chat', () => {
       )
     },
   })
+
   const currentReplyMap = computed({
     get: () => {
       const current = replyMapping.get(currentRoomId.value as number)
@@ -79,7 +86,9 @@ export const useChatStore = defineStore('chat', () => {
       replyMapping.set(currentRoomId.value, val as Map<number, number[]>)
     },
   })
+
   const isGroup = computed(() => currentRoomType.value === RoomTypeEnum.Group)
+
   /**
    * 获取当前会话信息
    */
@@ -105,6 +114,8 @@ export const useChatStore = defineStore('chat', () => {
       ],
     ]),
   )
+
+  // 当前会话的新消息计数
   const currentNewMsgCount = computed({
     get: () => {
       const current = newMsgCount.get(currentRoomId.value as number)
@@ -150,7 +161,9 @@ export const useChatStore = defineStore('chat', () => {
 
   // TODO: 未完成
   const getMsgList = async (size = pageSize) => {
+
     currentMessageOptions.value && (currentMessageOptions.value.isLoading = true)
+
     const data = await apis
       .getMsgList({
         params: {
@@ -163,6 +176,7 @@ export const useChatStore = defineStore('chat', () => {
       .finally(() => {
         currentMessageOptions.value && (currentMessageOptions.value.isLoading = false)
       })
+    
     // 数据不存在直接返回
     if (!data) return
     // 计算时间块
@@ -185,14 +199,12 @@ export const useChatStore = defineStore('chat', () => {
       uidCollectYet.add(msg.fromUser.uid)
     })
     // 获取用户信息缓存
-    // TODO: 未完成
     cachedStore.getBatchUserInfo([...uidCollectYet])
     // 为保证获取的历史消息在前面
     const newList = [...computedList, ...chatMessageList.value]
     currentMessageMap.value?.clear() // 清空Map
     newList.forEach((msg) => {
       currentMessageMap.value?.set(msg.message.id, msg)
-      console.log(currentMessageMap.value);
     })
 
     // 如果 currentMessageOptions.value 存在，更新其 cursor、isLast 和 isLoading 属性
@@ -222,9 +234,8 @@ export const useChatStore = defineStore('chat', () => {
       })
     // 如果没有获取到数据，直接返回
     if (!data) return
+
     // 如果需要刷新，替换会话列表，否则将新的会话添加到会话列表的末尾
-    // debugger
-    // debugger
     isFresh
       ? sessionList.splice(0, sessionList.length, ...data.data)
       : sessionList.push(...data.data)
@@ -278,12 +289,14 @@ export const useChatStore = defineStore('chat', () => {
     sessionList.sort((pre, cur) => cur.lastTime - pre.lastTime)
   }
 
+  // 更新会话
   const updateSession = (roomId: number, roomProps: Partial<SessionItem>) => {
     const session = sessionList.find((item) => item.roomId === roomId)
     session && roomProps && Object.assign(session, roomProps)
     sortAndUniqueSessionList()
   }
 
+  // 更新会话最后活跃时间
   const updateSessionLastActiveTime = (roomId: number, room?: SessionItem) => {
     const session = sessionList.find((item) => item.roomId === roomId)
     if (session) {
@@ -301,10 +314,12 @@ export const useChatStore = defineStore('chat', () => {
     return sessionList.find((item) => item.roomId === roomId) as SessionItem
   }
 
-  const getNewSessions = async ()=>{
+
+  // 当收到新消息是刷新数据
+  const fresh = async ()=>{
     // 获取本地最新的会话
     const session = sessionList[0]
-    // 请求所有时间大于最新会话时间的会话
+    // 请求所有时间大于等于最新会话时间的会话
     const data = await apis
       .getSessionList({
         params: {
@@ -315,6 +330,42 @@ export const useChatStore = defineStore('chat', () => {
     if (!data) return
     // 将新会话添加到会话列表的最前面
     sessionList.unshift(...data.data)
+    // 对会话列表进行排序和去重
+    sortAndUniqueSessionList()
+
+    // 更新会话对应的消息列表
+    for (const sessionItem of data.data) {
+      // 如果会话的消息有本地缓存
+      if (messageMap.has(sessionItem.roomId)) {
+        freshMsgList(sessionItem)
+      }
+    }
+  }
+
+  const freshMsgList = async (session: SessionItem) => {
+    // 获取本地最新的消息
+    const msgMap = messageMap.get(session.roomId)
+    if(msgMap === undefined) return
+    let id = 0
+    for(const msg of msgMap.values()){
+      if(msg.message.id > id){
+        id = msg.message.id
+      }
+    }
+    // 请求所有id大于等于最新消息id的消息
+    const data = await apis
+      .getNewMsgList({
+        params: {
+          msgId: id,
+          roomId: session.roomId,
+        },
+      })
+      .send()
+    if (!data) return
+    // 刷新消息列表
+    for(const msg of data){
+      pushMsg(msg)
+    }
   }
 
   const pushMsg = async (msg: MessageType) => {
@@ -519,6 +570,6 @@ export const useChatStore = defineStore('chat', () => {
     currentSessionInfo,
     getMessage,
     removeContact,
-    getNewSessions,
+    fresh,
   }
 })
