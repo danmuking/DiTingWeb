@@ -21,7 +21,7 @@ onMounted(() => {
     observer = new IntersectionObserver(async (entries) => {
       if (entries?.[0]?.isIntersecting) {
         // // 加载更多
-        // await groupStore.loadMore()
+        await groupStore.loadMore()
         // 停止观察该元素
         groupListLastElRef.value && observer.unobserve(groupListLastElRef.value)
         // 延迟500毫秒后，重新观察  groupListLastElRef 元素

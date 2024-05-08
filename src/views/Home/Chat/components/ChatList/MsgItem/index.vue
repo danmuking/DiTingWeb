@@ -243,7 +243,7 @@ const currentReadList = (msgId: number) => {
               @contextmenu.prevent.stop="handleRightClick($event)"
             >
               <!-- 这里是未读数计算 -->
-              <div
+              <!-- <div
                 v-if="isCurrentUser"
                 @click="currentReadList(msg.message.id)"
                 class="chat-item-read-count"
@@ -257,7 +257,7 @@ const currentReadList = (msgId: number) => {
                 <el-icon v-else>
                   <IEpCheck />
                 </el-icon>
-              </div>
+              </div> -->
               <!-- 消息加载中 -->
               <Icon v-if="msg?.loading" icon="loading" :size="20" spin />
               <!-- 渲染消息内容体 -->

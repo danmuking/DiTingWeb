@@ -13,6 +13,7 @@ export default {
   getNewMsgList: `${prefix}/api/contact/getNewMsgList`,
   getUserInfoBatch: `${prefix}/api/contact/userInfo/batch`, // 批量获取成员详细信息
   sendMsg: `${prefix}/api/chat/msg`,
+  getGroupUserList: `${prefix}/api/group/getGroupMemberList`,
   // -------------- 好友相关 ---------------
   requestFriendList: `${prefix}/api/user/getApplyList`, // 好友申请列表
   getContactList: `${prefix}/api/user/getFriendList`, // 联系人列表
@@ -44,7 +45,6 @@ export default {
   getMsgReadList: `${prefix}/capi/chat/msg/read/page`, // 消息的已读未读列表
   getMsgReadCount: `${prefix}/capi/chat/msg/read`, // 消息已读未读数
   createGroup: `${prefix}/capi/room/group`, // 新增群组
-  getGroupUserList: `${prefix}/capi/room/public/group/member/page`,
   inviteGroupMember: `${prefix}/capi/room/group/member`, // 邀请群成员
   exitGroup: `${prefix}/capi/room/group/member/exit`, // 退群
   addAdmin: `${prefix}/capi/room/group/admin`, // 添加管理员

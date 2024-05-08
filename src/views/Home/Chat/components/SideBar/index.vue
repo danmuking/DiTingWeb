@@ -11,7 +11,7 @@ const chatStore = useChatStore()
 const globalStore = useGlobalStore()
 onBeforeMount(() => {
   // 请求会话列表
-  chatStore.getSessionList()
+  // chatStore.getSessionList()
 })
 const sessionList = computed(() =>
   chatStore.sessionList.map((item) => {

@@ -21,7 +21,7 @@ const onReplyMsg = async (msgFromUser: MessageType) => {
 </script>
 
 <template>
-  <div class="msg-option" v-if="!msg.loading">
+  <!-- <div class="msg-option" v-if="!msg.loading">
     <span class="msg-option-item" title="回复">
       <Icon icon="reply" :size="14" v-login="() => onReplyMsg(msg)" />
     </span>
@@ -32,11 +32,10 @@ const onReplyMsg = async (msgFromUser: MessageType) => {
       <Icon
         icon="dislike"
         :size="15">
-      <!-- TODO -->
       </Icon>
 
     </span>
-  </div>
+  </div> -->
 </template>
 
 <style lang="scss" src="./styles.scss" scoped />

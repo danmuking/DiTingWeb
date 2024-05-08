@@ -75,8 +75,8 @@ export const useContactStore = defineStore('contact', () => {
     requestFriendsOptions.isLoading = false
   }
   // 默认执行一次
-  getContactList()
-  getRequestFriendsList()
+  // getContactList()
+  // getRequestFriendsList()
   /** 接受好友请求 */
   const onAcceptFriend = (applyId: number) => {
     // 同意好友申请

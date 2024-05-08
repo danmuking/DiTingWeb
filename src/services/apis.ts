@@ -51,6 +51,8 @@ export default {
     // 获取更新的会话列表
   getNewMsgList: (params?: any) =>
   getRequest<MessageType[]>(urls.getNewMsgList, params),
+  /** 获取群成员列表 */
+  getGroupList: (params?: any) => getRequest<ListResponse<UserItem>>(urls.getGroupUserList, params),
 
   
 

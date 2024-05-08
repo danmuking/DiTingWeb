@@ -101,7 +101,7 @@ export const useGroupStore = defineStore('group', () => {
       .send()
     if (!data) return
     const tempNew = cloneDeep(
-      uniqueUserList(refresh ? data.list : [...data.list, ...userList.value]),
+      uniqueUserList(refresh ? data.data : [...data.data, ...userList.value]),
     )
     tempNew.sort(sorAction)
     userList.value = tempNew
@@ -111,7 +111,7 @@ export const useGroupStore = defineStore('group', () => {
 
     /** 收集需要请求用户详情的 uid */
     const uidCollectYet: Set<number> = new Set() // 去重用
-    data.list?.forEach((user) => uidCollectYet.add(user.uid))
+    data.data?.forEach((user) => uidCollectYet.add(user.uid))
     // 获取用户信息缓存
     cachedStore.getBatchUserInfo([...uidCollectYet])
   }

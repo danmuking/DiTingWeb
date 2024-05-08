@@ -144,8 +144,8 @@ export const useChatStore = defineStore('chat', () => {
       // 群组的时候去请求
       if (currentRoomType.value === RoomTypeEnum.Group) {
         groupStore.getGroupUserList(true)
-        groupStore.getCountStatistic()
-        cachedStore.getGroupAtUserBaseInfo()
+        // groupStore.getCountStatistic()
+        // cachedStore.getGroupAtUserBaseInfo()
       }
     }
 
@@ -278,8 +278,9 @@ export const useChatStore = defineStore('chat', () => {
     // 遍历会话列表
     sessionList.forEach((item) => (
       // 将每个会话项的 roomId 作为键，会话项本身作为值，存储到 temp 对象中
-      // 如果有重复的 roomId，后面的会话项会覆盖前面的会话项，从而实现去重
-      temp[item.roomId] = item))
+      // 如果有重复的 roomId，保留时间更新的，从而实现去重
+      temp[item.roomId] = temp[item.roomId] ? (temp[item.roomId].lastTime > item.lastTime ? temp[item.roomId] : item) : item
+      ))
     // 清空会话列表，然后将 temp 对象中的所有值（即去重后的会话项）添加到会话列表中
     sessionList.splice(0, sessionList.length, ...Object.values(temp))
     // 对会话列表进行排序

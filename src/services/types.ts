@@ -99,7 +99,7 @@ export type UserItem = {
   /** 用户名称 */
   name: string
   /** 角色ID */
-  roleId?: number
+  // roleId?: number
   /** uid */
   uid: number
 }

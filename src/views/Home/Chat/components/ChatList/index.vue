@@ -45,7 +45,7 @@ onMounted(() => {
 const onToTop = async () => {
   if (messageOptions.value?.isLoading) return
   const oldIndex = virtualListRef.value.getSizes()
-  // await chatStore.loadMore()
+  await chatStore.loadMore()
   virtualListRef.value.scrollToIndex(virtualListRef.value.getSizes() - oldIndex)
 }
 
@@ -68,6 +68,7 @@ const onScroll = throttle((eventData) => {
 const getKey = (item: MessageType) => item.message.id
 </script>
 
+// FIXME：在时间戳附近滚动是会出现弹跳
 <template>
   <div class="chat-msg-list" @contextmenu.prevent>
     <RoomName />
