@@ -173,7 +173,6 @@ class WS {
       case WsResponseMessageType.ReceiveMessage: {
         // 刷新会话列表
         // chatStore.pushMsg(params.data as MessageType)
-        // FIXME:会话列表去重
         chatStore.fresh()
         break
       }

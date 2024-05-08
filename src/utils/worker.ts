@@ -73,9 +73,10 @@ const onConnectError = () => {
   postMsg({ type: 'error' })
 }
 // ws 连接 close
+// FIXME：token是否应该失效
 const onConnectClose = () => {
   onCloseHandler()
-  token = null
+  // token = null
   postMsg({ type: 'close' })
 }
 // ws 连接成功
