@@ -1,28 +1,29 @@
 <script setup lang="ts">
-import { computed, onBeforeMount } from 'vue'
-import { formatTimestamp } from '@/utils/computedTime'
-import { useChatStore } from '@/stores/chat'
-import { useGlobalStore } from '@/stores/global'
-import renderReplyContent from '@/utils/renderReplyContent'
-import { MsgEnum, RoomTypeEnum } from '@/enums'
-import { useUserInfo } from '@/hooks/useCached'
+import { computed, onBeforeMount } from "vue";
+import { formatTimestamp } from "@/utils/computedTime";
+import { useChatStore } from "@/stores/chat";
+import { useGlobalStore } from "@/stores/global";
+import renderReplyContent from "@/utils/renderReplyContent";
+import { MsgEnum, RoomTypeEnum } from "@/enums";
+import { useUserInfo } from "@/hooks/useCached";
+import SearchBar from "@/views/Home/Chat/components/SearchBar/index.vue";
 
-const chatStore = useChatStore()
-const globalStore = useGlobalStore()
+const chatStore = useChatStore();
+const globalStore = useGlobalStore();
 onBeforeMount(() => {
   // 请求会话列表
   // chatStore.getSessionList()
-})
+});
 const sessionList = computed(() =>
   chatStore.sessionList.map((item) => {
     // 最后一条消息内容
-    const lastMsg = Array.from(chatStore.messageMap.get(item.roomId)?.values() || [])?.slice(
-      -1,
-    )?.[0]
-    let LastUserMsg = ''
+    const lastMsg = Array.from(
+      chatStore.messageMap.get(item.roomId)?.values() || []
+    )?.slice(-1)?.[0];
+    let LastUserMsg = "";
     if (lastMsg) {
       // TODO:未完成
-      const lastMsgUserName = useUserInfo(lastMsg.fromUser.uid)
+      const lastMsgUserName = useUserInfo(lastMsg.fromUser.uid);
       // const lastMsgUserName = "test"
       LastUserMsg =
         lastMsg.message?.type === MsgEnum.RECALL
@@ -30,54 +31,62 @@ const sessionList = computed(() =>
           : renderReplyContent(
               lastMsgUserName.value.name,
               lastMsg.message?.type,
-              lastMsg.message?.body?.content || lastMsg.message?.body,
-            )
+              lastMsg.message?.body?.content || lastMsg.message?.body
+            );
     }
     return {
       ...item,
       // tag: item.hot_Flag === IsAllUserEnum.Yes ? '官方' : '',
-      lastMsg: LastUserMsg || item.lastMsg || '欢迎使用MallChat',
+      lastMsg: LastUserMsg || item.lastMsg || "欢迎使用MallChat",
       lastMsgTime: formatTimestamp(item?.lastTime),
-    }
-  }),
-)
+    };
+  })
+);
 // 加载更多
 const load = () => {
-  chatStore.getSessionList()
-}
+  chatStore.getSessionList();
+};
 // 选中的聊天对话
-const currentSession = computed(() => globalStore.currentSession)
+const currentSession = computed(() => globalStore.currentSession);
 // 选中会话
 const onSelectSelectSession = (roomId: number, roomType: RoomTypeEnum) => {
-  globalStore.currentSession.roomId = roomId
-  globalStore.currentSession.type = roomType
-}
+  globalStore.currentSession.roomId = roomId;
+  globalStore.currentSession.type = roomType;
+};
 </script>
 
 <template>
-  <ul class="chat-message" :infinite-scroll-immediate="false" v-infinite-scroll="load">
-    <li
-    v-for="(item, index) in sessionList"
-      :key="index"
-      :data-room-id="item.roomId"
-      :class="['chat-message-item', { active: currentSession.roomId === item.roomId }]"
-      @click="onSelectSelectSession(item.roomId, item.type)"
-    >
-      <div class="item-wrapper">
-        <el-badge :value="item.unreadCount" :max="99" :hidden="item.unreadCount < 1" class="item">
-          <el-avatar shape="circle" :size="38" :src="item.avatar" />
-        </el-badge>
-        <div class="message-info">
-          <div style="white-space: nowrap">
-            <span class="person">{{ item.name }}</span>
-            <span v-if="item.tag" class="tag">{{ item.tag }}</span>
+  <div class="wrapper">
+    <SearchBar></SearchBar>
+    <ul class="chat-message" :infinite-scroll-immediate="false" v-infinite-scroll="load">
+      <li
+        v-for="(item, index) in sessionList"
+        :key="index"
+        :data-room-id="item.roomId"
+        :class="['chat-message-item', { active: currentSession.roomId === item.roomId }]"
+        @click="onSelectSelectSession(item.roomId, item.type)"
+      >
+        <div class="item-wrapper">
+          <el-badge
+            :value="item.unreadCount"
+            :max="99"
+            :hidden="item.unreadCount < 1"
+            class="item"
+          >
+            <el-avatar shape="circle" :size="38" :src="item.avatar" />
+          </el-badge>
+          <div class="message-info">
+            <div style="white-space: nowrap">
+              <span class="person">{{ item.name }}</span>
+              <span v-if="item.tag" class="tag">{{ item.tag }}</span>
+            </div>
+            <div class="message-message">{{ item.lastMsg }}</div>
           </div>
-          <div class="message-message">{{ item.lastMsg }}</div>
+          <span class="message-time">{{ item.lastMsgTime }}</span>
         </div>
-        <span class="message-time">{{ item.lastMsgTime }}</span>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style lang="scss" src="./styles.scss" scoped />

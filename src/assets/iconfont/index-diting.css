@@ -5,9 +5,9 @@
 @font-face {
     font-family: 'diting';  /* Project id 4532118 */
     src: 
-         url('//at.alicdn.com/t/c/font_4532118_l845azdxscs.woff2?t=1714825452694') format('woff2'),
-         url('//at.alicdn.com/t/c/font_4532118_l845azdxscs.woff?t=1714825452694') format('woff'),
-         url('//at.alicdn.com/t/c/font_4532118_l845azdxscs.ttf?t=1714825452694') format('truetype');
+         url('//at.alicdn.com/t/c/font_4532118_alpvsvpkydk.woff2?t=1715330327834') format('woff2'),
+         url('//at.alicdn.com/t/c/font_4532118_alpvsvpkydk.woff?t=1715330327834') format('woff'),
+         url('//at.alicdn.com/t/c/font_4532118_alpvsvpkydk.ttf?t=1715330327834') format('truetype');
   }
 
 .diting {
@@ -55,4 +55,8 @@
 }
 .icon-img:before {
     content: '\ea0e';
+}
+
+.icon-add:before {
+    content: '\e60f';
 }

@@ -17,6 +17,7 @@ export default {
   // -------------- 好友相关 ---------------
   requestFriendList: `${prefix}/api/user/getApplyList`, // 好友申请列表
   getContactList: `${prefix}/api/user/getFriendList`, // 联系人列表
+  getUserInfoByName: `${prefix}/api/user/getUserInfoByName`, // 查询用户信息
 
 
 

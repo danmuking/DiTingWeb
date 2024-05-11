@@ -1,0 +1,59 @@
+.search-bar {
+  display: flex;
+  height: 30px;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+
+  // margin-top: 20px;
+  .el-input {
+    margin-right: 5px;
+  }
+
+  ;
+
+  .el-input__wrapper {
+    border-radius: 50px;
+  }
+
+  ;
+}
+
+.el-popover.add-popover {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+
+  .el-button.add-item {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    border-width: 0;
+  }
+}
+.search-friend{
+  margin-bottom: 5px;
+}
+
+.add-friend-table {
+  height: 0px;
+  .el-table__inner-wrapper:before {
+    height:0px;
+  }
+
+  table th,
+  table td {
+    border-bottom: none !important;
+  }
+
+  //去掉最下面的那一条线
+  .el-table::before {
+    height: 0px;
+  }
+
+  .customer-table .el-table__fixed-right::before,
+  .el-table__fixed::before {
+    width: 0;
+  }
+}

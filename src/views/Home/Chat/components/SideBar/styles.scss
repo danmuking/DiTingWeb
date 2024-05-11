@@ -1,7 +1,13 @@
+.wrapper{
+  // overflow-y: auto;
+  overflow: hidden;
+  margin: 20px 10px;
+}
 .chat-message {
+  height: 100%;
   display: none;
   padding: 0;
-  margin: 20px 10px;
+  
   overflow-y: auto;
   border-radius: 8px;
 

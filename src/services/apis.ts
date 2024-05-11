@@ -17,6 +17,7 @@ import type {
   SessionItem,
   UserInfoType,
   UserItem,
+  UserFriendAddInfo,
 } from '@/services/types'
 import { alovaIns } from './request'
 import urls from './urls'
@@ -53,6 +54,8 @@ export default {
   getRequest<MessageType[]>(urls.getNewMsgList, params),
   /** 获取群成员列表 */
   getGroupList: (params?: any) => getRequest<ListResponse<UserItem>>(urls.getGroupUserList, params),
+  /** 根据昵称获取用户信息 */
+  getUserInfoByName: (params?: any) => getRequest<UserFriendAddInfo[]>(urls.getUserInfoByName, params),
 
   
 

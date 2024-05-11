@@ -410,3 +410,7 @@ export type MsgReadUnReadCountType = {
   /** 未读数 */
   unReadCount: number | null
 }
+
+export type UserFriendAddInfo = Pick<UserItem, 'avatar' | 'name'|'uid'>&{
+  friendStatus:number,
+};
