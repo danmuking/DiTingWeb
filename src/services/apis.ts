@@ -58,6 +58,8 @@ export default {
   getUserInfoByName: (params?: any) => getRequest<UserFriendAddInfo[]>(urls.getUserInfoByName, params),
   /** 发送添加好友请求 */
   sendAddFriendRequest: (data: { uid: number; msg: string }) => postRequest(urls.sendAddFriendRequest, data),
+  /** 删除好友 */
+  deleteFriend: (params: { uid: number }) => deleteRequest(urls.deleteFriend, params),
 
   
 
@@ -104,8 +106,6 @@ export default {
   /** 同意好友申请 */
   applyFriendRequest: (params: { applyId: number }) =>
     putRequest(urls.sendAddFriendRequest, params),
-  /** 同意好友申请 */
-  deleteFriend: (params: { targetUid: number }) => deleteRequest(urls.deleteFriend, params),
   /** 好友申请未读数 */
   newFriendCount: () => getRequest<{ unReadCount: number }>(urls.newFriendCount),
   

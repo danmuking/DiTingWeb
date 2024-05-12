@@ -19,6 +19,7 @@ export default {
   getContactList: `${prefix}/api/user/getFriendList`, // 联系人列表
   getUserInfoByName: `${prefix}/api/user/getUserInfoByName`, // 查询用户信息
   sendAddFriendRequest: `${prefix}/api/user/add`, // 申请好友
+  deleteFriend: `${prefix}/api/user/delete`, // 删除好友
 
 
 
@@ -39,7 +40,6 @@ export default {
   getEmoji: `${prefix}/capi/user/emoji/list`, // 查询表情包
 
   // -------------- 好友相关 ---------------
-  deleteFriend: `${prefix}/capi/user/friend`, // 删除好友
   newFriendCount: `${prefix}/capi/user/friend/apply/unread`, // 申请未读数
 
   // -------------- 聊天室相关 ---------------
