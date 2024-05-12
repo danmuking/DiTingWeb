@@ -56,6 +56,8 @@ export default {
   getGroupList: (params?: any) => getRequest<ListResponse<UserItem>>(urls.getGroupUserList, params),
   /** 根据昵称获取用户信息 */
   getUserInfoByName: (params?: any) => getRequest<UserFriendAddInfo[]>(urls.getUserInfoByName, params),
+  /** 发送添加好友请求 */
+  sendAddFriendRequest: (data: { uid: number; msg: string }) => postRequest(urls.sendAddFriendRequest, data),
 
   
 
@@ -99,9 +101,6 @@ export default {
   /** 获取联系人列表 */
   getContactList: (params?: any) =>
     getRequest<ListResponse<ContactItem>>(urls.getContactList, { params }),
-  /** 发送添加好友请求 */
-  sendAddFriendRequest: (params: { targetUid: number; msg: string }) =>
-    postRequest<EmojiItem[]>(urls.sendAddFriendRequest, params),
   /** 同意好友申请 */
   applyFriendRequest: (params: { applyId: number }) =>
     putRequest(urls.sendAddFriendRequest, params),

@@ -98,3 +98,15 @@ export enum ChangeTypeEnum {
   /** 2 移除群组 */
   REMOVE,
 }
+
+/** 好友关系 */
+export enum FriendTypeEnum {
+  // 未添加
+  NotAdd = 1,
+  // 等待同意
+  WaitAgree,
+  // 已添加
+  Added,
+
+}
+
