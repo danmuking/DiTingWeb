@@ -101,7 +101,7 @@ export const useContactStore = defineStore('contact', () => {
     // 同意好友申请
     await apis.deleteFriend({ uid: uid }).send()
     // 刷新好友申请列表
-    // getRequestFriendsList(true)
+    getRequestFriendsList(true)
     // 刷新好友列表
     getContactList(true)
   }
