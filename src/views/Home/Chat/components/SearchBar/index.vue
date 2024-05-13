@@ -86,8 +86,9 @@
       >
     </div>
     <el-table
+      class="add-friend-table"
       @selection-change=""
-      v-el-table-infinite-scroll="load"
+      v-el-table-infinite-scroll="onContactsLoad"
       :data="tableData"
       height="400px"
       :show-header="false"
@@ -107,7 +108,7 @@
 
 <script lang="ts" setup>
 import { Plus } from "@element-plus/icons-vue";
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 import apis from "@/services/apis";
 import type { UserFriendAddInfo } from "@/services/types";
 import { FriendTypeTextMap } from "@/constant/user";
@@ -169,50 +170,29 @@ const applyFriend = (data: UserFriendAddInfoVo) => {
 
 const friendName = ref("");
 
-const tableData = ref([
-  {
-    date: "2016-05-03",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-02",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-04",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-01",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-08",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-06",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-07",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-]);
-const load = () => {
-  // 添加数据
-  tableData.value.push({
-    date: "2016-05-03",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  });
+import { useContactStore } from "@/stores/contacts";
+import { useUserInfo } from "@/hooks/useCached";
+import item from "@/components/VirtualList/item";
+const contactStore = useContactStore();
+const onContactsLoad = () => {
+  contactStore.getContactList();
 };
+interface UserInfo {
+  name: string;
+  avatar: string;
+}
+
+const tableData: UserInfo[] = reactive([]);
+watch(contactStore.contactsList, (newList) => {
+  const newTableData = newList.map((item) => {
+    const currentUid = item?.uid;
+    const currentUser = useUserInfo(currentUid);
+    return {
+      name: currentUser.value.name || "",
+      avatar: currentUser.value.avatar || "",
+    };
+  });
+  tableData.splice(0, tableData.length, ...newTableData);
+});
 </script>
 <style lang="scss" src="./styles.scss" />

@@ -78,7 +78,7 @@ const onSelectSelectSession = (roomId: number, roomType: RoomTypeEnum) => {
           <div class="message-info">
             <div style="white-space: nowrap">
               <span class="person">{{ item.name }}</span>
-              <span v-if="item.tag" class="tag">{{ item.tag }}</span>
+              <!-- <span v-if="item.tag" class="tag">{{ item.tag }}</span> -->
             </div>
             <div class="message-message">{{ item.lastMsg }}</div>
           </div>
