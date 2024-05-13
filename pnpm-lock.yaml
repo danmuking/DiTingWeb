@@ -23,6 +23,9 @@ importers:
       dayjs:
         specifier: ^1.11.11
         version: 1.11.11
+      el-table-infinite-scroll:
+        specifier: ^3.0.3
+        version: 3.0.3(typescript@5.4.5)
       element-plus:
         specifier: ^2.7.2
         version: 2.7.2(vue@3.4.26(typescript@5.4.5))
@@ -868,6 +871,9 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
+  core-js@3.37.0:
+    resolution: {integrity: sha512-fu5vHevQ8ZG4og+LXug8ulUtVxjOcEYvifJr7L5Bfq9GOztVqsKd9/59hUk2ZSbCrS3BqUr3EpaYGIYzq7g3Ug==}
+
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
@@ -912,6 +918,9 @@ packages:
 
   delegates@1.0.0:
     resolution: {integrity: sha512-bd2L678uiWATM6m5Z1VzNCErI3jiGzt6HGY8OVICs40JQq/HALfbyNJmp0UDakEY4pMMaN0Ly5om/B1VI/+xfQ==}
+
+  el-table-infinite-scroll@3.0.3:
+    resolution: {integrity: sha512-cmMHg4MxrNOV2dFziV3ISRo+rM/3tAH8TE3wWMGKd4ucjvk21Bfb6MJfPuNAicLOkq4fYZm+J+mr0NmDPnvolQ==}
 
   electron-to-chromium@1.4.752:
     resolution: {integrity: sha512-P3QJreYI/AUTcfBVrC4zy9KvnZWekViThgQMX/VpJ+IsOBbcX5JFpORM4qWapwWQ+agb2nYAOyn/4PMXOk0m2Q==}
@@ -2850,6 +2859,8 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
+  core-js@3.37.0: {}
+
   core-util-is@1.0.3: {}
 
   cosmiconfig@9.0.0(typescript@5.4.5):
@@ -2885,6 +2896,15 @@ snapshots:
   decamelize@1.2.0: {}
 
   delegates@1.0.0: {}
+
+  el-table-infinite-scroll@3.0.3(typescript@5.4.5):
+    dependencies:
+      core-js: 3.37.0
+      element-plus: 2.7.2(vue@3.4.26(typescript@5.4.5))
+      vue: 3.4.26(typescript@5.4.5)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - typescript
 
   electron-to-chromium@1.4.752: {}
 
