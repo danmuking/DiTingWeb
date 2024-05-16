@@ -26,15 +26,8 @@
     width="500"
   >
     <div class="search-friend">
-      <el-input
-        placeholder="好友昵称"
-        style="width: 85%"
-        v-model="friendName"
-      />
-      <el-button
-        type="primary"
-        style="margin-left: 1%; width: 10%"
-        @click="searchFriend"
+      <el-input placeholder="好友昵称" style="width: 85%" v-model="friendName" />
+      <el-button type="primary" style="margin-left: 1%; width: 10%" @click="searchFriend"
         >搜索</el-button
       >
     </div>
@@ -55,10 +48,7 @@
       </el-table-column>
       <el-table-column label="Operations" align="right">
         <template #default="scope">
-          <el-button
-            :disabled="scope.row.disable"
-            @click="applyFriend(scope.row)"
-          >
+          <el-button :disabled="scope.row.disable" @click="applyFriend(scope.row)">
             {{ scope.row.prompt }}
           </el-button>
         </template>
@@ -73,15 +63,8 @@
     width="500"
   >
     <div class="search-friend">
-      <el-input
-        placeholder="好友昵称"
-        style="width: 85%"
-        v-model="friendName"
-      />
-      <el-button
-        type="primary"
-        style="margin-left: 1%; width: 10%"
-        @click="searchFriend"
+      <el-input placeholder="好友昵称" style="width: 85%" v-model="friendName" />
+      <el-button type="primary" style="margin-left: 1%; width: 10%" @click="searchFriend"
         >搜索</el-button
       >
     </div>
@@ -92,6 +75,7 @@
       :data="tableData"
       height="400px"
       :show-header="false"
+      ref="createGroupTable"
     >
       <el-table-column type="selection" />
       <el-table-column label="userInfo">
@@ -103,6 +87,12 @@
         </template>
       </el-table-column>
     </el-table>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="createGroupDialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="createGroup"> Confirm </el-button>
+      </div>
+    </template>
   </el-dialog>
 </template>
 
@@ -112,7 +102,7 @@ import { reactive, ref, watch } from "vue";
 import apis from "@/services/apis";
 import type { UserFriendAddInfo } from "@/services/types";
 import { FriendTypeTextMap } from "@/constant/user";
-import { ElMessage, ElMessageBox } from "element-plus";
+import { ElMessage, ElMessageBox, ElTable } from "element-plus";
 import { FriendTypeEnum } from "@/enums";
 import UserItem from "./UserItem.vue";
 import { default as vElTableInfiniteScroll } from "el-table-infinite-scroll";
@@ -180,6 +170,7 @@ const onContactsLoad = () => {
 interface UserInfo {
   name: string;
   avatar: string;
+  uid: number;
 }
 
 const tableData: UserInfo[] = reactive([]);
@@ -188,11 +179,25 @@ watch(contactStore.contactsList, (newList) => {
     const currentUid = item?.uid;
     const currentUser = useUserInfo(currentUid);
     return {
+      uid: currentUid,
       name: currentUser.value.name || "",
       avatar: currentUser.value.avatar || "",
     };
   });
   tableData.splice(0, tableData.length, ...newTableData);
 });
+const createGroupTable = ref<InstanceType<typeof ElTable>>()
+const createGroup = async () => {
+  const data = createGroupTable.value?.getSelectionRows();
+  const uidList = data.map((item) => item.uid);
+  const res = await apis.createGroup({
+      uidList,
+  })
+  .send()
+  if (res) {
+    ElMessage.success("创建成功");
+    createGroupDialogVisible.value = false;
+  }
+};
 </script>
 <style lang="scss" src="./styles.scss" />

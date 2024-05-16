@@ -18,26 +18,32 @@ import type {
   UserInfoType,
   UserItem,
   UserFriendAddInfo,
-} from '@/services/types'
-import { alovaIns } from './request'
-import urls from './urls'
+} from "@/services/types";
+import { alovaIns } from "./request";
+import urls from "./urls";
 
 const getRequest = <T>(url: string, config?: any) =>
-  alovaIns.Get<T>(url, { ...config, localCache: 0 })
-const postRequest = <T>(url: string, params?: any) => alovaIns.Post<T, unknown>(url, params)
-const putRequest = <T>(url: string, params?: any) => alovaIns.Put<T, unknown>(url, params)
-const deleteRequest = <T>(url: string, params?: any) => alovaIns.Delete<T, unknown>(url, params)
+  alovaIns.Get<T>(url, { ...config, localCache: 0 });
+const postRequest = <T>(url: string, params?: any) =>
+  alovaIns.Post<T, unknown>(url, params);
+const putRequest = <T>(url: string, params?: any) =>
+  alovaIns.Put<T, unknown>(url, params);
+const deleteRequest = <T>(url: string, params?: any) =>
+  alovaIns.Delete<T, unknown>(url, params);
 
 export default {
   // 用户登录
-  userLogin: (params: { username: string, password: string }) => postRequest(urls.userLogin, params),
+  userLogin: (params: { username: string; password: string }) =>
+    postRequest(urls.userLogin, params),
   // 用户注册
-  userRegister: (params: { username: string, password: string }) => postRequest(urls.userRegister, params),
+  userRegister: (params: { username: string; password: string }) =>
+    postRequest(urls.userRegister, params),
   // 获取会话列表
   getSessionList: (params?: any) =>
     getRequest<ListResponse<SessionItem>>(urls.getSessionList, params),
   /** 获取消息列表 */
-  getMsgList: (params?: any) => getRequest<ListResponse<MessageType>>(urls.getMsgList, params),
+  getMsgList: (params?: any) =>
+    getRequest<ListResponse<MessageType>>(urls.getMsgList, params),
   /** 批量获取成员详细信息 */
   getUserInfoBatch: (users: CacheUserReq[]) =>
     postRequest<CacheUserItem[]>(urls.getUserInfoBatch, { list: users }),
@@ -45,34 +51,47 @@ export default {
   sendMsg: (data?: MessageReq) => postRequest<MessageType>(urls.sendMsg, data),
   /** 获取好友申请列表 */
   requestFriendList: (params?: any) =>
-    getRequest<ListResponse<RequestFriendItem>>(urls.requestFriendList, { params }),
+    getRequest<ListResponse<RequestFriendItem>>(urls.requestFriendList, {
+      params,
+    }),
   // 获取更新的会话列表
   getNewSessionList: (params?: any) =>
     getRequest<SessionItem[]>(urls.getNewSessionList, params),
-    // 获取更新的会话列表
+  // 获取更新的会话列表
   getNewMsgList: (params?: any) =>
-  getRequest<MessageType[]>(urls.getNewMsgList, params),
+    getRequest<MessageType[]>(urls.getNewMsgList, params),
   /** 获取群成员列表 */
-  getGroupList: (params?: any) => getRequest<ListResponse<UserItem>>(urls.getGroupUserList, params),
+  getGroupList: (params?: any) =>
+    getRequest<ListResponse<UserItem>>(urls.getGroupUserList, params),
   /** 根据昵称获取用户信息 */
-  getUserInfoByName: (params?: any) => getRequest<UserFriendAddInfo[]>(urls.getUserInfoByName, params),
+  getUserInfoByName: (params?: any) =>
+    getRequest<UserFriendAddInfo[]>(urls.getUserInfoByName, params),
   /** 发送添加好友请求 */
-  sendAddFriendRequest: (data: { uid: number; msg: string }) => postRequest(urls.sendAddFriendRequest, data),
+  sendAddFriendRequest: (data: { uid: number; msg: string }) =>
+    postRequest(urls.sendAddFriendRequest, data),
   /** 删除好友 */
-  deleteFriend: (params: { uid: number }) => deleteRequest(urls.deleteFriend, params),
+  deleteFriend: (params: { uid: number }) =>
+    deleteRequest(urls.deleteFriend, params),
+  /** 新增群组 */
+  createGroup: (data: { uidList: number[] }) =>
+    postRequest(urls.createGroup, data),
 
-  
 
 
 
 
-  
+
+
   /** 获取群成员统计 */
-  getMemberStatistic: () => getRequest<GroupStatisticType>(urls.getMemberStatistic),
+  getMemberStatistic: () =>
+    getRequest<GroupStatisticType>(urls.getMemberStatistic),
   /** 房间内的所有群成员列表-@专用 */
   getAllUserBaseInfo: (params?: any) =>
-    getRequest<Pick<CacheUserItem, 'avatar' | 'name' | 'uid'>[]>(urls.getAllUserBaseInfo, params),
-  
+    getRequest<Pick<CacheUserItem, "avatar" | "name" | "uid">[]>(
+      urls.getAllUserBaseInfo,
+      params
+    ),
+
   /** 批量获取徽章信息 */
   getBadgesBatch: (badges: CacheBadgeReq[]) =>
     postRequest<CacheBadgeItem[]>(urls.getBadgesBatch, { reqList: badges }),
@@ -83,23 +102,30 @@ export default {
   /** 获取勋章列表 */
   getBadgeList: () => getRequest<BadgeType[]>(urls.getBadgeList, {}),
   /** 设置用户勋章 */
-  setUserBadge: (badgeId: number) => putRequest<void>(urls.setUserBadge, { badgeId }),
+  setUserBadge: (badgeId: number) =>
+    putRequest<void>(urls.setUserBadge, { badgeId }),
   /** 修改用户名 */
-  modifyUserName: (name: string) => putRequest<void>(urls.modifyUserName, { name }),
+  modifyUserName: (name: string) =>
+    putRequest<void>(urls.modifyUserName, { name }),
   /** 撤回消息 */
-  recallMsg: (data: { msgId: number; roomId: number }) => putRequest<void>(urls.recallMsg, data),
+  recallMsg: (data: { msgId: number; roomId: number }) =>
+    putRequest<void>(urls.recallMsg, data),
   /** 拉黑用户 */
   blockUser: (data: { uid: number }) => putRequest<void>(urls.blockUser, data),
   /** 获取临时上传链接 */
   getUploadUrl: (params: any) =>
-    getRequest<{ downloadUrl: string; uploadUrl: string }>(urls.fileUpload, { params }),
+    getRequest<{ downloadUrl: string; uploadUrl: string }>(urls.fileUpload, {
+      params,
+    }),
   /** 新增表情包 */
   addEmoji: (data: { uid: number; expressionUrl: string }) =>
     postRequest<MessageType>(urls.addEmoji, data),
   /** 获取表情 **/
-  getEmoji: (params: { uid: number }) => getRequest<EmojiItem[]>(urls.getEmoji, { params }),
+  getEmoji: (params: { uid: number }) =>
+    getRequest<EmojiItem[]>(urls.getEmoji, { params }),
   /** 删除id */
-  deleteEmoji: (params: { id: number }) => deleteRequest<EmojiItem[]>(urls.deleteEmoji, params),
+  deleteEmoji: (params: { id: number }) =>
+    deleteRequest<EmojiItem[]>(urls.deleteEmoji, params),
   /** 获取联系人列表 */
   getContactList: (params?: any) =>
     getRequest<ListResponse<ContactItem>>(urls.getContactList, { params }),
@@ -107,8 +133,9 @@ export default {
   applyFriendRequest: (params: { applyId: number }) =>
     putRequest(urls.sendAddFriendRequest, params),
   /** 好友申请未读数 */
-  newFriendCount: () => getRequest<{ unReadCount: number }>(urls.newFriendCount),
-  
+  newFriendCount: () =>
+    getRequest<{ unReadCount: number }>(urls.newFriendCount),
+
   /** 消息的已读未读列表 */
   getMsgReadList: (params?: any) =>
     getRequest<ListResponse<{ uid: number }>>(urls.getMsgReadList, params),
@@ -116,10 +143,8 @@ export default {
   getMsgReadCount: (params?: any) =>
     getRequest<MsgReadUnReadCountType[]>(urls.getMsgReadCount, params),
   /** 消息阅读上报 */
-  markMsgRead: (params?: any) => putRequest<MsgReadUnReadCountType[]>(urls.getMsgReadCount, params),
-  /** 新增群组 */
-  createGroup: (params: { uidList: number[] }) =>
-    postRequest<{ id: number }>(urls.createGroup, params),
+  markMsgRead: (params?: any) =>
+    putRequest<MsgReadUnReadCountType[]>(urls.getMsgReadCount, params),
   /** 邀请群成员 */
   inviteGroupMember: (params: { roomId: number; uidList: number[] }) =>
     postRequest(urls.inviteGroupMember, params),
@@ -127,7 +152,8 @@ export default {
   removeGroupMember: (params: { roomId: number; uid: number }) =>
     deleteRequest(urls.inviteGroupMember, params),
   /** 群组详情 */
-  groupDetail: (params: { id: number }) => getRequest<GroupDetailReq>(urls.groupDetail, { params }),
+  groupDetail: (params: { id: number }) =>
+    getRequest<GroupDetailReq>(urls.groupDetail, { params }),
   /** 会话详情 */
   sessionDetail: (params: { id: number }) =>
     getRequest<SessionItem>(urls.sessionDetail, { params }),
@@ -151,4 +177,4 @@ export default {
     deleteRequest<Boolean>(urls.exitGroup, {
       roomId,
     }),
-}
+};
