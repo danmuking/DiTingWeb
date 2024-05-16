@@ -68,7 +68,7 @@
         >搜索</el-button
       >
     </div>
-    <el-table
+    <ElTable
       class="add-friend-table"
       @selection-change=""
       v-el-table-infinite-scroll="onContactsLoad"
@@ -86,7 +86,7 @@
           </div>
         </template>
       </el-table-column>
-    </el-table>
+    </ElTable>
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="createGroupDialogVisible = false">Cancel</el-button>
@@ -102,7 +102,7 @@ import { reactive, ref, watch } from "vue";
 import apis from "@/services/apis";
 import type { UserFriendAddInfo } from "@/services/types";
 import { FriendTypeTextMap } from "@/constant/user";
-import { ElMessage, ElMessageBox, ElTable } from "element-plus";
+import { ElMessage, ElMessageBox } from "element-plus";
 import { FriendTypeEnum } from "@/enums";
 import UserItem from "./UserItem.vue";
 import { default as vElTableInfiniteScroll } from "el-table-infinite-scroll";
@@ -161,9 +161,12 @@ const applyFriend = (data: UserFriendAddInfoVo) => {
 const friendName = ref("");
 
 import { useContactStore } from "@/stores/contacts";
+import {useGlobalStore} from "@/stores/global";
+import {useChatStore} from "@/stores/chat";
 import { useUserInfo } from "@/hooks/useCached";
 import item from "@/components/VirtualList/item";
 const contactStore = useContactStore();
+const chatStore = useChatStore()
 const onContactsLoad = () => {
   contactStore.getContactList();
 };
@@ -186,18 +189,21 @@ watch(contactStore.contactsList, (newList) => {
   });
   tableData.splice(0, tableData.length, ...newTableData);
 });
-const createGroupTable = ref<InstanceType<typeof ElTable>>()
+const createGroupTable = ref<InstanceType<typeof ElTable>>();
 const createGroup = async () => {
   const data = createGroupTable.value?.getSelectionRows();
   const uidList = data.map((item) => item.uid);
-  const res = await apis.createGroup({
+  const res = await apis
+    .createGroup({
       uidList,
-  })
-  .send()
-  if (res) {
-    ElMessage.success("创建成功");
-    createGroupDialogVisible.value = false;
-  }
+    })
+    .send()
+    .then((res) => {
+      ElMessage.success("创建成功");
+      createGroupDialogVisible.value = false;
+      const globalStore = useGlobalStore()
+      chatStore.fresh()
+    });
 };
 </script>
 <style lang="scss" src="./styles.scss" />
