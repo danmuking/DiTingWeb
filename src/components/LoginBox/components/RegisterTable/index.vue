@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // import QrCode from 'qrcode.vue'
-import { useWsLoginStore, LoginStatus } from "@/stores/ws";
+import { useWsLoginStore } from "@/stores/ws";
 import { reactive, ref } from "vue";
 import type { FormRules, FormInstance } from "element-plus";
 import apis from "@/services/apis";
@@ -11,7 +11,7 @@ interface RegisterForm {
 }
 // type RegisterPostForm = Pick<RegisterForm, 'username' | 'password'>
 const ruleFormRef = ref<FormInstance>()
-const validatePass = (rule: any, value: any, callback: any) => {
+const validatePass = (value: any, callback: any) => {
     if (value === '') {
         callback(new Error('请再次输入密码'))
     } else if (value !== registerForm.password) {

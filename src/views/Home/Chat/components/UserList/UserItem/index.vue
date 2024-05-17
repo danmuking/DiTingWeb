@@ -30,9 +30,9 @@ const handleRightClick = (e: MouseEvent) => {
 }
 
 const computedRole = computed(() => {
-  if (props.user.roleId) {
-    return GROUP_ROLE_MAP[props.user.roleId]
-  }
+  // if (props.user?.roleId) {
+  //   return GROUP_ROLE_MAP[props.user?.roleId]
+  // }
   return ''
 })
 </script>
@@ -52,9 +52,9 @@ const computedRole = computed(() => {
     />
     <div class="user-name">
       <div class="text">{{ userInfo.name }}</div>
-      <div v-if="computedRole" class="badge flex-center" :class="computedRole.class">
+      <!-- <div v-if="computedRole" class="badge flex-center" :class="computedRole.class">
         {{ computedRole.text }}
-      </div>
+      </div> -->
     </div>
     <ContextMenu v-model:show="isShowMenu" :options="menuOptions" :uid="(user?.uid as number)" />
   </li>

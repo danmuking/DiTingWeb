@@ -102,9 +102,9 @@ import { reactive, ref, watch } from "vue";
 import apis from "@/services/apis";
 import type { UserFriendAddInfo } from "@/services/types";
 import { FriendTypeTextMap } from "@/constant/user";
-import { ElMessage, ElMessageBox } from "element-plus";
+import { ElMessage, ElMessageBox, ElTable } from "element-plus";
 import { FriendTypeEnum } from "@/enums";
-import UserItem from "./UserItem.vue";
+// import UserItem from "./UserItem.vue";
 import { default as vElTableInfiniteScroll } from "el-table-infinite-scroll";
 
 type UserFriendAddInfoVo = UserFriendAddInfo & {
@@ -161,10 +161,10 @@ const applyFriend = (data: UserFriendAddInfoVo) => {
 const friendName = ref("");
 
 import { useContactStore } from "@/stores/contacts";
-import {useGlobalStore} from "@/stores/global";
+// import {useGlobalStore} from "@/stores/global";
 import {useChatStore} from "@/stores/chat";
 import { useUserInfo } from "@/hooks/useCached";
-import item from "@/components/VirtualList/item";
+// import item from "@/components/VirtualList/item";
 const contactStore = useContactStore();
 const chatStore = useChatStore()
 const onContactsLoad = () => {
@@ -192,16 +192,16 @@ watch(contactStore.contactsList, (newList) => {
 const createGroupTable = ref<InstanceType<typeof ElTable>>();
 const createGroup = async () => {
   const data = createGroupTable.value?.getSelectionRows();
-  const uidList = data.map((item) => item.uid);
-  const res = await apis
+  const uidList = data.map((item:any) => item.uid);
+  await apis
     .createGroup({
       uidList,
     })
     .send()
-    .then((res) => {
+    .then(() => {
       ElMessage.success("创建成功");
       createGroupDialogVisible.value = false;
-      const globalStore = useGlobalStore()
+      // const globalStore = useGlobalStore()
       chatStore.fresh()
     });
 };

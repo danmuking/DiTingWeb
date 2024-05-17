@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // import QrCode from 'qrcode.vue'
-import { reactive, computed } from "vue";
+import { reactive } from "vue";
 import { useWsLoginStore, LoginStatus } from "@/stores/ws";
 import { useUserStore } from '@/stores/user'
 import { useChatStore } from '@/stores/chat'
@@ -10,7 +10,7 @@ import { useEmojiStore } from '@/stores/emoji'
 import type { FormRules } from "element-plus";
 import { computedToken } from '@/services/request'
 import apis from "@/services/apis";
-import { OnlineEnum, ChangeTypeEnum, RoomTypeEnum } from '@/enums'
+import { OnlineEnum, } from '@/enums'
 import type {
   LoginSuccessResType,
 } from '@/services/types'
@@ -25,8 +25,8 @@ const loginStore = useWsLoginStore()
 const userStore = useUserStore()
 const chatStore = useChatStore()
 const groupStore = useGroupStore()
-const globalStore = useGlobalStore()
-const emojiStore = useEmojiStore()
+// const globalStore = useGlobalStore()
+// const emojiStore = useEmojiStore()
 const showRegister = () => {
   loginStore.showLoginTalbe = false
 }

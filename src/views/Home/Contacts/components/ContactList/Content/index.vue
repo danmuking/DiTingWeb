@@ -55,7 +55,7 @@ const onStartSession = async (uid: number) => {
         <div class="contact-info">
           <span class="contact-info-name">{{ currentUser.name }}</span>
           <span class="contact-info-uid"> uid: {{ currentUser.uid }}</span>
-          <span class="contact-info-place"> 地区: {{ currentUser.locPlace || "-" }}</span>
+          <span class="contact-info-place"> 地区: {{ "-" }}</span>
         </div>
         <!-- <el-dropdown v-if="!isNotFriend" class="contact-info-more-dropdown" trigger="click">
           <Icon class="contact-info-more" icon="more" :size="20" />
