@@ -27,7 +27,7 @@ const menuList = [
     desc: '哔哩哔哩',
     icon: 'bilibili',
     handler: () => {
-      window.open('https://space.bilibili.com/146719540', '_blank')
+      // window.open('https://space.bilibili.com/146719540', '_blank')
     },
   },
   {
@@ -35,7 +35,7 @@ const menuList = [
     desc: '语雀',
     icon: 'yuque',
     handler: () => {
-      window.open('https://www.yuque.com/snab/planet/cef1mcko4fve0ur3', '_blank')
+      window.open('https://danmuking.github.io/', '_blank')
     },
   },
   {
@@ -43,7 +43,7 @@ const menuList = [
     desc: '腾讯云',
     icon: 'tengxunyun',
     handler: () => {
-      window.open('https://curl.qcloud.com/qSaH0JLT', '_blank')
+      window.open('https://curl.qcloud.com/DhrHVHJh', '_blank')
     },
   },
   {
@@ -51,7 +51,7 @@ const menuList = [
     desc: 'MallChatWeb Server',
     icon: 'GitHubBlack',
     handler: () => {
-      window.open('https://github.com/zongzibinbin/MallChat', '_blank')
+      window.open('https://github.com/danmuking/DiTing-Go', '_blank')
     },
   },
   {
@@ -59,7 +59,7 @@ const menuList = [
     desc: 'MallChatWeb Web',
     icon: 'GitHubBlack',
     handler: () => {
-      window.open('https://github.com/Evansy/MallChatWeb', '_blank')
+      window.open('https://github.com/danmuking/DiTingWeb', '_blank')
     },
   },
 ]
