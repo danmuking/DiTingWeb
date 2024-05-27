@@ -70,7 +70,6 @@
     </div>
     <ElTable
       class="add-friend-table"
-      @selection-change=""
       v-el-table-infinite-scroll="onContactsLoad"
       :data="tableData"
       height="400px"
@@ -102,7 +101,7 @@ import { reactive, ref, watch } from "vue";
 import apis from "@/services/apis";
 import type { UserFriendAddInfo } from "@/services/types";
 import { FriendTypeTextMap } from "@/constant/user";
-import { ElMessage, ElMessageBox, ElTable } from "element-plus";
+import { ElMessage, ElMessageBox} from "element-plus";
 import { FriendTypeEnum } from "@/enums";
 // import UserItem from "./UserItem.vue";
 import { default as vElTableInfiniteScroll } from "el-table-infinite-scroll";
