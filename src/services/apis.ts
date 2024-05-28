@@ -75,6 +75,9 @@ export default {
   /** 新增群组 */
   createGroup: (data: { uidList: number[] }) =>
     postRequest(urls.createGroup, data),
+  /** 解散群组 */
+  dismissGroup: (data: { roomId: number }) =>
+    deleteRequest(urls.dismissGroup, data),
 
 
 

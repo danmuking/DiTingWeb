@@ -193,6 +193,23 @@ export const useGroupStore = defineStore('group', () => {
     globalStore.currentSession.roomId = chatStore.sessionList[0].roomId
   }
 
+  /**
+   * 解散群聊
+   */
+  const dismissGroup = async () => {
+    await apis.dismissGroup({ roomId: currentRoomId.value }).send()
+
+    // 更新群成员列表
+    const index = userList.value.findIndex((user) => user.uid === userStore.userInfo.uid)
+    userList.value.splice(index, 1)
+
+    // 更新会话列表
+    chatStore.removeContact(currentRoomId.value)
+
+    // 切换为第一个会话
+    globalStore.currentSession.roomId = chatStore.sessionList[0].roomId
+  }
+
   return {
     userList,
     userListOptions,
@@ -210,5 +227,6 @@ export const useGroupStore = defineStore('group', () => {
     addAdmin,
     revokeAdmin,
     exitGroup,
+    dismissGroup,
   }
 })

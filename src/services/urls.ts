@@ -15,6 +15,7 @@ export default {
   sendMsg: `${prefix}/api/chat/msg`,
   getGroupUserList: `${prefix}/api/group/getGroupMemberList`,
   createGroup: `${prefix}/api/group/create`, // 新增群组
+  dismissGroup: `${prefix}/api/group/delete`, // 新增群组
   // -------------- 好友相关 ---------------
   requestFriendList: `${prefix}/api/user/getApplyList`, // 好友申请列表
   getContactList: `${prefix}/api/user/getFriendList`, // 联系人列表
