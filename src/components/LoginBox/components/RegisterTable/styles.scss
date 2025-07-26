@@ -1,22 +1,146 @@
-.login-wrapper{
+.register-container {
   width: 100%;
+  position: relative;
 }
 
-.login-input-wrapper{
+.register-wrapper {
   width: 100%;
-  .el-input {
-    // margin: 0 8px;
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  animation: slideInUp 0.6s ease-out;
+}
+
+
+
+.register-input-wrapper{
+  width: 100%;
+  margin-bottom: 20px;
+  
+  .input-with-icon {
+    position: relative;
+    width: 100%;
+    
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #909399;
+      font-size: 18px;
+      z-index: 3;
+      transition: color 0.3s ease;
+    }
+    
+    .custom-input {
+      width: 100%;
+      
+      .el-input__wrapper {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid transparent;
+        border-radius: 12px;
+        padding-left: 45px;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          border-color: #409eff;
+        }
+        
+        &.is-focus {
+          border-color: #409eff;
+          
+          .input-icon {
+            color: #409eff;
+          }
+        }
+      }
+    }
+  }
+  
+  .code-input-wrapper {
+    display: flex;
+    gap: 12px;
+    
+    .input-with-icon {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .send-code-btn {
+      width: 30%;
+      height: 100%;
+      white-space: nowrap;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #409eff, #66b1ff);
+      border: none;
+      color: white;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      
+      &:hover:not(.disabled) {
+        transform: translateY(-2px);
+      }
+      
+      &.disabled {
+        background: #c0c4cc;
+        cursor: not-allowed;
+      }
+    }
   }
 }
-.login-button-wrapper{
+.register-button-wrapper{
   width: 100%;
-  // padding: 0 8px;
-  // 居中
   display: flex;
   justify-content: center;
+  
   .el-button{
     width: 100%;
     height: 40px;
-    // width: 49%;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    &:hover::before {
+      left: 100%;
+    }
+  }
+  
+  .register-btn {
+    background: linear-gradient(135deg, #87ceeb, #b0e0e6);
+    color: white;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// 动画关键帧
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

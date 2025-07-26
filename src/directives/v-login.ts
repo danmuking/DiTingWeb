@@ -8,6 +8,7 @@ const handler = (fn: Function) => {
   // 没登录显示登录界面
   if (!userStore.isSign) {
     loginStore.showLogin = true
+    loginStore.showLoginTalbe = true // 确保显示登录表单
     return
   }
   // 已登录执行回调

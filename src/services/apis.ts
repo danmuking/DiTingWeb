@@ -35,8 +35,14 @@ export default {
   // 用户登录
   userLogin: (params: { username: string; password: string }) =>
     postRequest(urls.userLogin, params),
+  // 手机号验证码登录
+  smsLogin: (params: { phone: string; code: string }) =>
+    postRequest(urls.smsLogin, params),
+  // 发送验证码
+  sendSmsCode: (params: { phone: string }) =>
+    postRequest(urls.sendSmsCode, params),
   // 用户注册
-  userRegister: (params: { username: string; password: string }) =>
+  userRegister: (params: { username: string; password: string; phone: string; code: string }) =>
     postRequest(urls.userRegister, params),
   // 获取会话列表
   getSessionList: (params?: any) =>
