@@ -41,8 +41,11 @@ export default {
   // 发送验证码
   sendSmsCode: (params: { phone: string }) =>
     postRequest(urls.sendSmsCode, params),
+  // 发送验证码到captcha接口
+  sendCaptcha: (params: { phone: string }) =>
+    postRequest(urls.sendCaptcha, params),
   // 用户注册
-  userRegister: (params: { username: string; password: string; phone: string; code: string }) =>
+  userRegister: (params: { username: string; password: string; phone: string; captcha: string }) =>
     postRequest(urls.userRegister, params),
   // 获取会话列表
   getSessionList: (params?: any) =>

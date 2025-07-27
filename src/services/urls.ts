@@ -6,6 +6,7 @@ export default {
   userRegister: `${prefix}/api/public/register`, // 注册
   smsLogin: `${prefix}/api/public/sms/login`, // 手机号验证码登录
   sendSmsCode: `${prefix}/api/public/sms/send`, // 发送验证码
+  sendCaptcha: `${prefix}/api/public/captcha`, // 发送验证码
 
   // -------------- 聊天室相关 ---------------
   // FIXME:这两个接口是否可以合并

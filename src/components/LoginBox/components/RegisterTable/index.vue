@@ -10,7 +10,7 @@ interface RegisterForm {
     password: string;
     repeatPassword: string;
     phone: string;
-    code: string;
+    captcha: string;
 }
 // type RegisterPostForm = Pick<RegisterForm, 'username' | 'password'>
 const ruleFormRef = ref<FormInstance>()
@@ -51,8 +51,8 @@ const validatePhone = (rule: any, value: any, callback: any) => {
 const validateCode = (rule: any, value: any, callback: any) => {
     if (value === '') {
         callback(new Error('请输入验证码'))
-    } else if (!/^\d{6}$/.test(value)) {
-        callback(new Error('请输入6位数字验证码'))
+    } else if (!/^\d{4}$/.test(value)) {
+        callback(new Error('请输入4位数字验证码'))
     } else {
         callback()
     }
@@ -65,14 +65,14 @@ const rules = reactive<FormRules<RegisterForm>>({
     password: [{ validator: validatePassword, trigger: 'blur' }],
     repeatPassword: [{ validator: validatePass, trigger: 'blur' }],
     phone: [{ validator: validatePhone, trigger: 'blur' }],
-    code: [{ validator: validateCode, trigger: 'blur' }],
+    captcha: [{ validator: validateCode, trigger: 'blur' }],
 });
 const registerForm = reactive<RegisterForm>({
     username: "",
     password: "",
     repeatPassword: "",
     phone: "",
-    code: ""
+    captcha: ""
 });
 
 const loginStore = useWsLoginStore();
@@ -98,7 +98,7 @@ const sendSmsCode = () => {
         return;
     }
     
-    apis.sendSmsCode({ phone: registerForm.phone })
+    apis.sendCaptcha({ phone: registerForm.phone })
         .send()
         .then(() => {
             ElMessage.success('验证码已发送');
@@ -125,7 +125,7 @@ const register = (formEl: FormInstance | undefined) => {
                     username: registerForm.username,
                     password: registerForm.password,
                     phone: registerForm.phone,
-                    code: registerForm.code,
+                    captcha: registerForm.captcha,
                 })
                 .send()
                 .then(() => {
@@ -137,7 +137,6 @@ const register = (formEl: FormInstance | undefined) => {
                 });
         } else {
             console.log('error submit!');
-            return false;
         }
     });
 };
@@ -170,11 +169,11 @@ const register = (formEl: FormInstance | undefined) => {
                         <ElInput size="large" v-model="registerForm.phone" placeholder="手机号" class="custom-input" />
                     </div>
                 </el-form-item>
-                <el-form-item label="" label-width="0" prop="code">
+                <el-form-item label="" label-width="0" prop="captcha">
                     <div class="code-input-wrapper">
                         <div class="input-with-icon">
                             <i class="el-icon-message input-icon"></i>
-                            <ElInput size="large" v-model="registerForm.code" placeholder="验证码" class="custom-input" />
+                            <ElInput size="large" v-model="registerForm.captcha" placeholder="验证码" class="custom-input" />
                         </div>
                         <el-button 
                             size="large" 
