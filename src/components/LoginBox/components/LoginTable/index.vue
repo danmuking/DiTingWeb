@@ -22,7 +22,7 @@ enum LoginType {
 }
 
 interface PasswordLoginForm {
-  username: string;
+  phone: string;
   password: string;
 }
 
@@ -45,7 +45,7 @@ const showRegister = () => {
 }
 
 // 手机号验证函数
-const validatePhone = (value: any, callback: any) => {
+const validatePhone = (rule: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('请输入手机号'))
   } else if (!/^1[3-9]\d{9}$/.test(value)) {
@@ -56,11 +56,11 @@ const validatePhone = (value: any, callback: any) => {
 }
 
 // 验证码验证函数
-const validateCode = (value: any, callback: any) => {
+const validateCode = (rule: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('请输入验证码'))
-  } else if (!/^\d{6}$/.test(value)) {
-    callback(new Error('验证码为6位数字'))
+  } else if (!/^\d{4}$/.test(value)) {
+    callback(new Error('验证码为4位数字'))
   } else {
     callback()
   }
@@ -68,7 +68,7 @@ const validateCode = (value: any, callback: any) => {
 
 // 账号密码登录表单
 const passwordForm = reactive<PasswordLoginForm>({
-  username: "",
+  phone: "",
   password: "",
 });
 
@@ -80,10 +80,7 @@ const smsForm = reactive<SmsLoginForm>({
 
 // 账号密码登录验证规则
 const passwordRules = reactive<FormRules<PasswordLoginForm>>({
-  username: [
-    { required: true, message: "请输入用户名", trigger: "blur" },
-    { min: 6, max: 15, message: "用户名长度在6-15个字符", trigger: "blur" },
-  ],
+  phone: [{ validator: validatePhone, trigger: 'blur' }],
   password: [{ required: true, message: "密码不能为空", trigger: "blur" }],
 });
 
@@ -113,7 +110,7 @@ const sendSmsCode = () => {
   }
 
   // 调用发送验证码的API
-  apis.sendSmsCode({ phone: smsForm.phone })
+  apis.sendCaptcha({ phone: smsForm.phone })
     .send()
     .then(() => {
       ElMessage.success('验证码已发送')
@@ -141,7 +138,7 @@ const passwordLogin = () => {
     if (valid) {
       apis
         .userLogin({
-          username: passwordForm.username,
+          phone: passwordForm.phone,
           password: passwordForm.password,
         })
         .send()
@@ -231,13 +228,13 @@ const handleLoginSuccess = (data: any) => {
         ref="passwordFormRef"
       >
         <div class="login-input-wrapper">
-          <el-form-item label-width="0" label="" prop="username">
+          <el-form-item label-width="0" label="" prop="phone">
             <div class="input-with-icon">
-              <i class="el-icon-user input-icon"></i>
+              <i class="el-icon-mobile-phone input-icon"></i>
               <ElInput 
                 size="large" 
-                v-model="passwordForm.username" 
-                placeholder="请输入用户名"
+                v-model="passwordForm.phone" 
+                placeholder="请输入手机号"
                 class="custom-input"
               />
             </div>
@@ -258,7 +255,7 @@ const handleLoginSuccess = (data: any) => {
         <!-- 切换登录方式 -->
         <div class="login-switch-text">
           <span @click="currentLoginType = LoginType.SMS" class="switch-link">
-            <i class="el-icon-mobile-phone"></i>
+            <i class="el-icon-message"></i>
             使用手机号验证码登录
           </span>
         </div>
@@ -331,8 +328,8 @@ const handleLoginSuccess = (data: any) => {
         <!-- 切换登录方式 -->
         <div class="login-switch-text">
           <span @click="currentLoginType = LoginType.PASSWORD" class="switch-link">
-            <i class="el-icon-user"></i>
-            使用账号密码登录
+            <i class="el-icon-mobile-phone"></i>
+            使用手机号密码登录
           </span>
         </div>
         <div class="login-button-wrapper">

@@ -33,7 +33,7 @@ const deleteRequest = <T>(url: string, params?: any) =>
 
 export default {
   // 用户登录
-  userLogin: (params: { username: string; password: string }) =>
+  userLogin: (params: { phone: string; password: string }) =>
     postRequest(urls.userLogin, params),
   // 手机号验证码登录
   smsLogin: (params: { phone: string; code: string }) =>
