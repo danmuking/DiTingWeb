@@ -33,6 +33,10 @@ export default {
   getAllUserBaseInfo: `${prefix}/capi/room/group/member/list`, // 房间内的所有群成员列表-@专用
   getUserInfoDetail: `${prefix}/capi/user/userInfo`, // 获取用户信息详情
   modifyUserName: `${prefix}/capi/user/name`, // 修改用户名
+  modifyPassword: `${prefix}/capi/user/password`, // 修改密码
+  modifyPhone: `${prefix}/capi/user/phone`, // 修改手机号
+  uploadAvatar: `${prefix}/capi/user/avatar`, // 上传头像
+  deleteAccount: `${prefix}/capi/user/account`, // 注销账户
   getBadgeList: `${prefix}/capi/user/badges`, // 徽章列表
   setUserBadge: `${prefix}/capi/user/badge`, // 设置用户徽章
   markMsg: `${prefix}/capi/chat/msg/mark`, // 消息标记

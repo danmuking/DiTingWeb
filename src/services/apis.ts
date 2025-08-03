@@ -33,10 +33,10 @@ const deleteRequest = <T>(url: string, params?: any) =>
 
 export default {
   // 用户登录
-  userLogin: (params: { phone: string; password: string }) =>
+  userLogin: (params: { phone: string; password: string; loginType: number }) =>
     postRequest(urls.userLogin, params),
   // 手机号验证码登录
-  smsLogin: (params: { phone: string; code: string }) =>
+  smsLogin: (params: { phone: string; code: string; loginType: number }) =>
     postRequest(urls.smsLogin, params),
   // 发送验证码
   sendSmsCode: (params: { phone: string }) =>
@@ -116,6 +116,18 @@ export default {
   /** 修改用户名 */
   modifyUserName: (name: string) =>
     putRequest<void>(urls.modifyUserName, { name }),
+  /** 修改密码 */
+  modifyPassword: (params: { oldPassword: string; newPassword: string }) =>
+    putRequest<void>(urls.modifyPassword, params),
+  /** 修改手机号 */
+  modifyPhone: (params: { newPhone: string; captcha: string }) =>
+    putRequest<void>(urls.modifyPhone, params),
+  /** 上传头像 */
+  uploadAvatar: (formData: FormData) =>
+    postRequest<{ avatarUrl: string }>(urls.uploadAvatar, formData),
+  /** 注销账户 */
+  deleteAccount: () =>
+    deleteRequest<void>(urls.deleteAccount),
   /** 撤回消息 */
   recallMsg: (data: { msgId: number; roomId: number }) =>
     putRequest<void>(urls.recallMsg, data),

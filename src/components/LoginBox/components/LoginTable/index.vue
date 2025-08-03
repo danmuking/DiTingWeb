@@ -140,6 +140,7 @@ const passwordLogin = () => {
         .userLogin({
           phone: passwordForm.phone,
           password: passwordForm.password,
+          loginType: 1, // 1表示账号密码登录
         })
         .send()
         .then((data) => {
@@ -161,6 +162,7 @@ const smsLogin = () => {
       apis.smsLogin({
         phone: smsForm.phone,
         code: smsForm.code,
+        loginType: 2, // 2表示验证码登录
       })
       .send()
       .then((data) => {

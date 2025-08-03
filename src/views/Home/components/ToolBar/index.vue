@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, onUnmounted } from 'vue'
 import { judgeClient } from '@/utils/detectDevice'
 import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 // import { useGroupStore } from '@/stores/group'
 // import { useGlobalStore } from '@/stores/global'
 
@@ -9,17 +11,80 @@ import { useUserStore } from '@/stores/user'
 
 const client = judgeClient()
 const visible = ref(false)
+const popoverVisible = ref(false)
+const popoverOpacity = ref(0)
+const hideTimeout = ref<NodeJS.Timeout | null>(null)
 const userStore = useUserStore()
+const router = useRouter()
 // const groupStore = useGroupStore()
 // const globalStore = useGlobalStore()
 
-const showSettingBox = () => (visible.value = true)
+const showSettingBox = () => {
+  if (!userStore.isSign) {
+    visible.value = true
+  }
+}
+
+// 退出登录
+const logout = () => {
+  // 清除本地数据
+  localStorage.removeItem('TOKEN')
+  localStorage.removeItem('USER_INFO')
+  userStore.isSign = false
+  userStore.userInfo = {}
+  
+  ElMessage.success('已退出登录')
+  
+  // 刷新页面或跳转到登录页
+  window.location.reload()
+}
+
+// 跳转到用户详情页
+const goToProfile = () => {
+  router.push('/profile')
+}
+
+// 弹窗控制函数
+const showPopover = () => {
+  // 清除之前的隐藏定时器
+  if (hideTimeout.value) {
+    clearTimeout(hideTimeout.value)
+    hideTimeout.value = null
+  }
+  popoverVisible.value = true
+  popoverOpacity.value = 1
+}
+
+const hidePopover = () => {
+  // 设置延迟隐藏
+  hideTimeout.value = setTimeout(() => {
+    // 开始渐隐动画
+    popoverOpacity.value = 0
+    // 动画结束后隐藏元素
+    setTimeout(() => {
+      popoverVisible.value = false
+      hideTimeout.value = null
+    }, 300) // 渐隐动画持续300ms
+  }, 500) // 0.5秒后开始渐隐
+}
+
+const handleMouseLeave = () => {
+  hidePopover()
+}
+
+// 组件卸载时清理定时器
+onUnmounted(() => {
+  if (hideTimeout.value) {
+    clearTimeout(hideTimeout.value)
+  }
+})
+
+
 const avatar = computed(() => userStore?.userInfo.avatar)
 // const unReadMark = computed(() => globalStore.unReadMark)
 
 // // 是否PC端
 const isPc = computed(() => client === 'PC')
-console.log(isPc)
 
 const menuList = [
   {
@@ -66,7 +131,27 @@ const menuList = [
 </script>
 <template>
   <aside class="side-toolbar">
-    <Avatar :src="userStore.isSign ? avatar : ''" :size="isPc ? 50 : 40" :shape="'square'" v-login="showSettingBox" />
+    <div v-if="userStore.isSign" class="avatar-wrapper" @mouseenter="showPopover" @mouseleave="handleMouseLeave">
+      <Avatar :src="avatar" :size="isPc ? 50 : 40" :shape="'square'" class="avatar-hover" />
+      <div v-if="popoverVisible" class="custom-popover" :style="{ opacity: popoverOpacity }" @mouseenter="showPopover" @mouseleave="handleMouseLeave">
+        <div class="menu-item" @click="goToProfile">
+          <i class="el-icon-user"></i>
+          <span>修改信息</span>
+        </div>
+        <div class="menu-item logout" @click="logout">
+          <i class="el-icon-switch-button"></i>
+          <span>退出登录</span>
+        </div>
+      </div>
+    </div>
+    
+    <Avatar 
+      v-else 
+      :src="''" 
+      :size="isPc ? 50 : 40" 
+      :shape="'square'" 
+      v-login="showSettingBox" 
+    />
     <div class="tool-icons">
       <div class="tool-icons">
       <!-- 会话 -->
